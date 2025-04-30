@@ -1,0 +1,24 @@
+import { config } from 'dotenv';
+config();
+import express, { json, urlencoded } from 'express';
+import cors from 'cors';
+const app = express();
+// import connectDB from './db/db';
+import cookieParser from 'cookie-parser';
+
+
+
+app.use(cookieParser());
+// connectDB();
+
+app.use(cors());
+app.use(json());
+app.use(urlencoded({ extended: true }));
+
+app.get('/', (req, res) => {
+    res.send('Hello World from Express!');
+});
+
+
+
+export default app;
