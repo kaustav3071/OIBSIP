@@ -1,5 +1,5 @@
 import express from 'express';
-import { registerUser, loginUser } from '../controllers/user.controller.js';
+import { registerUser, loginUser, logoutUser, userProfile } from '../controllers/user.controller.js';
 import { verifyEmail } from '../controllers/email.controller.js';
 import { body } from 'express-validator';
 
@@ -22,6 +22,12 @@ userRouter.post('/login', loginUser);
 
 
 userRouter.get('/verify/:token', verifyEmail);
+
+userRouter.get('/logout', logoutUser);
+
+userRouter.get('/profile', userProfile) //error: userProfile is not a function
+
+
 
 // Export the router
 export default userRouter;

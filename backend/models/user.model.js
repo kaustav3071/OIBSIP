@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
+import BlacklistToken from './blacklistToken.model.js';
 
 // Load environment variables
 dotenv.config();
@@ -46,13 +47,6 @@ const userSchema = new mongoose.Schema(
   }
 );
 
-// Pre-save hook to hash password
-userSchema.pre('save', async function (next) {
-  if (!this.isModified('password')) return next();
-  this.password = await bcrypt.hash(this.password, 10);
-  next();
-});
-
 // Generate JWT token
 userSchema.methods.generateAuthToken = function () {
   return jwt.sign({ _id: this._id, role: this.role }, process.env.JWT_SECRET, {
@@ -62,13 +56,29 @@ userSchema.methods.generateAuthToken = function () {
 
 // Compare passwords
 userSchema.methods.comparePassword = async function (password) {
-  return await bcrypt.compare(password, this.password);
+  const result = await bcrypt.compare(password, this.password);
+  console.log('Comparing:', password, 'with', this.password, '=>', result);
+  return result;
 };
-
 
 userSchema.statics.hashPassword = async function (password) {
   return await bcrypt.hash(password, 10);
 };
+
+// Check if token is blacklisted
+userSchema.statics.isTokenBlacklisted = async function (token) {
+  try {
+      const blacklisted = await BlacklistToken.findOne({ token });
+      return blacklisted ? true : false;
+  } catch (error) {
+      console.error("Error checking blacklist:", error);
+      return false; // Assume token is not blacklisted if an error occurs
+  }
+};
+
+
+
+
 
 // Create and export the model
 const User = mongoose.models.User || mongoose.model('User', userSchema);
