@@ -14,7 +14,7 @@ const Navbar = () => {
         <nav className="navbar">
             <img src={assets.logo} alt="Logo" className="logo" />
             <img src={assets.profile} alt="Profile" className="profile" />
-            <h1>Kaustav Das</h1>
+            <h1>Kaustav Das Admin</h1>
             <ul className="nav-links">
                 <li>
                     <Link
