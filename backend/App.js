@@ -20,6 +20,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/pizza', PizzaRouter)
+app.use('/images', express.static('uploads'));
 
 export default app;
 

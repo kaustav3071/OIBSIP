@@ -1,5 +1,5 @@
 import express from 'express';
-import { addPizza } from '../controllers/pizza.controller.js';
+import { addPizza, getAllPizzas, deletePizza  } from '../controllers/pizza.controller.js';
 import multer from 'multer';
 
 const router = express.Router();
@@ -16,7 +16,11 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 
-router.post("/add", upload.single("image") ,addPizza);
+router.post("/add", upload.single("pizzaimage") ,addPizza);
+
+router.get("/getallpizzas", getAllPizzas);
+
+router.delete("/deletepizza", deletePizza);
 
 
 
