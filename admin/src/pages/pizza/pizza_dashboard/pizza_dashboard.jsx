@@ -1,5 +1,7 @@
 import React from "react";
 import "./pizza_dashboard.css"; // Import the CSS file
+import { assets } from "../../../assets/assets"; // Import assets
+import { Link } from "react-router-dom"; // Import Link for navigation
 
 const PizzaDashboard = () => {
     return (
@@ -7,19 +9,21 @@ const PizzaDashboard = () => {
             {/* Left Section: Pizza Image */}
             <div className="pizza-image">
                 <img
-                    src="https://via.placeholder.com/300" // Replace with your pizza image URL
+                    src={assets.pizza_image || "https://via.placeholder.com/350"} // Replace with your pizza image URL
                     alt="Pizza"
                 />
             </div>
 
             {/* Right Section: Options */}
             <div className="pizza-options">
-                <h2 className="options-title">Pizza Options</h2>
+                <h2 className="options-title">Manage Your Pizzas</h2>
                 <div className="options-list">
-                    <button className="option-button">Add Pizza</button>
-                    <button className="option-button">Get All Pizzas</button>
-                    <button className="option-button">Delete Pizza</button>
-                    <button className="option-button">Update Pizza</button>
+                    <Link to="/pizza_dashboard/add" className="option-item">
+                        Add Pizza
+                    </Link>
+                    <Link to="/pizza_dashboard/get" className="option-item">
+                        View Pizzas
+                    </Link>
                 </div>
             </div>
         </div>

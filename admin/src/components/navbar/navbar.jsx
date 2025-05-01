@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./navbar.css"; // Assuming you have a CSS file for styling
 import { assets } from "../../assets/assets"; // Adjust the path as necessary  
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
     const [activeLink, setActiveLink] = useState("#dashboard"); // Default active link
@@ -16,76 +17,76 @@ const Navbar = () => {
             <h1>Kaustav Das</h1>
             <ul className="nav-links">
                 <li>
-                    <a
-                        href="#dashboard"
+                    <Link
+                        to = "/"
                         className={`nav-link ${activeLink === "#dashboard" ? "active" : ""}`}
                         onClick={() => handleLinkClick("#dashboard")}
                     >
                         Dashboard
-                    </a>
+                    </Link>
                 </li>
                 <li>
-                    <a
-                        href="#users"
+                    <Link
+                        to="/users"
                         className={`nav-link ${activeLink === "#users" ? "active" : ""}`}
                         onClick={() => handleLinkClick("#users")}
                     >
                         Users
-                    </a>
+                    </Link>
                 </li>
                 <li>
-                    <a
-                        href="#settings"
+                    <Link
+                        to="/settings"
                         className={`nav-link ${activeLink === "#settings" ? "active" : ""}`}
                         onClick={() => handleLinkClick("#settings")}
                     >
                         Settings
-                    </a>
+                    </Link>
                 </li>
                 <li>
-                    <a
-                        href="#notifications"
+                    <Link  
+                        to="/notifications"
                         className={`nav-link ${activeLink === "#notifications" ? "active" : ""}`}
                         onClick={() => handleLinkClick("#notifications")}
                     >
                         Notifications
-                    </a>
+                    </Link>
                 </li>
                 <li>
-                    <a
-                        href="#orders"
+                    <Link
+                        to="/orders"
                         className={`nav-link ${activeLink === "#orders" ? "active" : ""}`}
                         onClick={() => handleLinkClick("#orders")}
                     >
                         Orders
-                    </a>
+                    </Link>
                 </li>
                 <li>
-                    <a
-                        href="#inventory"
+                    <Link   
+                        to="/inventory"
                         className={`nav-link ${activeLink === "#inventory" ? "active" : ""}`}
                         onClick={() => handleLinkClick("#inventory")}
                     >
                         Inventory
-                    </a>
+                    </Link>
                 </li>
                 <li>
-                    <a
-                        href="#pizzas"
+                    <Link
+                        to="/pizza_dashboard" 
                         className={`nav-link ${activeLink === "#pizzas" ? "active" : ""}`}
                         onClick={() => handleLinkClick("#pizzas")}
                     >
                         Pizzas
-                    </a>
+                    </Link>
                 </li>
                 <li>
-                    <a
-                        href="#logout"
+                    <Link
+                        to="#logout"
                         className={`nav-link ${activeLink === "#logout" ? "active" : ""}`}
                         onClick={() => handleLinkClick("#logout")}
                     >
                         Logout
-                    </a>
+                    </Link>
                 </li>
             </ul>
         </nav>

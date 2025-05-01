@@ -1,0 +1,142 @@
+.update-pizza {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background: linear-gradient(135deg, #ffffff, #f9f9f9); /* Subtle gradient background */
+    border-radius: 16px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Enhanced shadow */
+    text-align: center;
+}
+
+.update-pizza h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Form container */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Image upload section */
+.update-img-upload {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.update-img-upload p {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #555;
+}
+
+.update-img-upload label img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px dashed #ccc;
+    padding: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.update-img-upload label img:hover {
+    transform: scale(1.1);
+    border-color: #4caf50; /* Green border on hover */
+}
+
+.update-img-upload input[type="file"] {
+    display: none; /* Hide the file input */
+}
+
+/* Input fields */
+.update-product-name,
+.update-product-description,
+.update-product-price {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+}
+
+.update-product-name p,
+.update-product-description p,
+.update-product-price p {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #555;
+}
+
+.update-product-name input,
+.update-product-description textarea,
+.update-product-price input {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background: #f9f9f9;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.update-product-name input:focus,
+.update-product-description textarea:focus,
+.update-product-price input:focus {
+    border-color: #4caf50; /* Green border on focus */
+    box-shadow: 0 0 8px rgba(76, 175, 80, 0.2); /* Green glow on focus */
+    outline: none;
+}
+
+.update-product-description textarea {
+    resize: none; /* Disable resizing */
+    height: 100px;
+}
+
+/* Submit button */
+.update-product-btn {
+    padding: 12px 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: white;
+    background: linear-gradient(135deg, #4caf50, #45a049); /* Green gradient */
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.update-product-btn:hover {
+    transform: translateY(-3px); /* Lift effect */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Shadow on hover */
+    background: linear-gradient(135deg, #45a049, #4caf50); /* Reverse gradient on hover */
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .update-pizza {
+        padding: 15px;
+    }
+
+    .update-pizza h1 {
+        font-size: 2rem;
+    }
+
+    .update-img-upload label img {
+        width: 120px;
+        height: 120px;
+    }
+
+    .update-product-btn {
+        font-size: 1rem;
+        padding: 10px 15px;
+    }
+}
