@@ -37,7 +37,7 @@ userRouter.get('/user/:id',GetUserById)
 
 userRouter.put('/updateUser/:id',UpdateUser)
 
-userRouter.delete('/deleteUser/:id',DeleteUser)
+userRouter.delete('/delete/:id',DeleteUser);
 
 
 userRouter.post('/forgotpassword', forgotPassword);

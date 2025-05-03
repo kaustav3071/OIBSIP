@@ -1,0 +1,56 @@
+.header {
+    height: 28vw; /* Reduced height */
+    margin: 20px auto; /* Adjusted margin */
+    width: 90%; /* Increased width */
+    background: url("/home_pizza.jpg") no-repeat center center; /* Centered background */
+    background-size: cover; /* Ensures the image covers the entire header */
+    position: relative;
+    border-radius: 10px; /* Optional: Adds rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Adds a subtle shadow */
+}
+
+.header-contents {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6); /* Makes text more readable */
+    animation: fadeIn 3s; /* Optional: Adds a fade-in effect */
+}
+
+.header-contents h2 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.header-contents p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+.header-contents button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    background: #4caf50;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.header-contents button:hover {
+    background: #45a049;
+}
+
+@keyframes fadeIn {
+    0%{
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}

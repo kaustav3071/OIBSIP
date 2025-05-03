@@ -18,10 +18,10 @@ const PizzaDashboard = () => {
             <div className="pizza-options">
                 <h2 className="options-title">Manage Your Pizzas</h2>
                 <div className="options-list">
-                    <Link to="/pizza_dashboard/add" className="option-item">
+                    <Link to="/admin/pizza_dashboard/add" className="option-item">
                         Add Pizza
                     </Link>
-                    <Link to="/pizza_dashboard/get" className="option-item">
+                    <Link to="/admin/pizza_dashboard/get" className="option-item">
                         View Pizzas
                     </Link>
                 </div>

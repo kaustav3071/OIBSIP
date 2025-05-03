@@ -16,7 +16,7 @@ export const registerUser = async (req, res, next) => {
     return res.status(400).json({ errors: errors.array() });
   }
 
-  const { name, email, password } = req.body;
+  const { name, email, password, role } = req.body;
 
   try {
     const isUserAlreadyExist = await userModel.findOne({ email });
@@ -32,6 +32,7 @@ export const registerUser = async (req, res, next) => {
       name,
       email,
       password: hashedPassword,
+      role: role || 'user', // Default to 'user' if no role is provided
       emailVerificationToken,
       isVerified: false,
     });

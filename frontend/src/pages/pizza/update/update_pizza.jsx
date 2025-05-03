@@ -32,7 +32,7 @@ const UpdatePizza = () => {
                 setCurrentImage(pizza.image);
             } else {
                 toast.error("Pizza not found!");
-                navigate("/pizza_dashboard/get");
+                navigate("/admin/pizza_dashboard/get");
             }
         } catch (error) {
             console.error(error);
@@ -65,7 +65,7 @@ const UpdatePizza = () => {
             const response = await axios.put(`${url}/updatepizza/${id}`, formData);
             if (response.status === 200) {
                 toast.success("Pizza updated successfully!");
-                navigate("/pizza_dashboard/get");
+                navigate("/admin/pizza_dashboard/get");
             } else {
                 toast.error("Failed to update pizza");
             }

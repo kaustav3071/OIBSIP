@@ -43,7 +43,7 @@ const GetAll = () => {
     };
 
     const handleUpdate = (id) => {
-        navigate(`/pizza_dashboard/update/${id}`); // Navigate to update page
+        navigate(`/admin/pizza_dashboard/update/${id}`); // Navigate to update page
     }
 
     useEffect(() => {
@@ -64,7 +64,7 @@ const GetAll = () => {
                             <div className="pizza-actions">
                                 <button
                                     className="update-btn"
-                                    onClick={() => navigate(`/pizza_dashboard/update/${pizza._id}`)} // Navigate to update page
+                                    onClick={() => navigate(`/admin/pizza_dashboard/update/${pizza._id}`)} // Navigate to update page
                                 >
                                     Update
                                 </button>

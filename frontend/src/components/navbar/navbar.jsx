@@ -18,16 +18,16 @@ const Navbar = () => {
             <ul className="nav-links">
                 <li>
                     <Link
-                        to = "/"
+                        to = "/admin"
                         className={`nav-link ${activeLink === "#dashboard" ? "active" : ""}`}
                         onClick={() => handleLinkClick("#dashboard")}
                     >
-                        Dashboard
+                        Admin Dashboard
                     </Link>
                 </li>
                 <li>
                     <Link
-                        to="/users"
+                        to="/admin/users"
                         className={`nav-link ${activeLink === "#users" ? "active" : ""}`}
                         onClick={() => handleLinkClick("#users")}
                     >
@@ -36,7 +36,7 @@ const Navbar = () => {
                 </li>
                 <li>
                     <Link
-                        to="/settings"
+                        to="/admin/settings"
                         className={`nav-link ${activeLink === "#settings" ? "active" : ""}`}
                         onClick={() => handleLinkClick("#settings")}
                     >
@@ -45,7 +45,7 @@ const Navbar = () => {
                 </li>
                 <li>
                     <Link  
-                        to="/notifications"
+                        to="/admin/notifications"
                         className={`nav-link ${activeLink === "#notifications" ? "active" : ""}`}
                         onClick={() => handleLinkClick("#notifications")}
                     >
@@ -54,7 +54,7 @@ const Navbar = () => {
                 </li>
                 <li>
                     <Link
-                        to="/orders"
+                        to="/admin/orders"
                         className={`nav-link ${activeLink === "#orders" ? "active" : ""}`}
                         onClick={() => handleLinkClick("#orders")}
                     >
@@ -63,7 +63,7 @@ const Navbar = () => {
                 </li>
                 <li>
                     <Link   
-                        to="/inventory"
+                        to="/admin/inventory"
                         className={`nav-link ${activeLink === "#inventory" ? "active" : ""}`}
                         onClick={() => handleLinkClick("#inventory")}
                     >
@@ -71,13 +71,9 @@ const Navbar = () => {
                     </Link>
                 </li>
                 <li>
-                    <Link
-                        to="/pizza_dashboard" 
-                        className={`nav-link ${activeLink === "#pizzas" ? "active" : ""}`}
-                        onClick={() => handleLinkClick("#pizzas")}
-                    >
-                        Pizzas
-                    </Link>
+                <Link to="/admin/pizza_dashboard" className={`nav-link ${activeLink === "#pizzas" ? "active" : ""}`} onClick={() => handleLinkClick("#pizzas")}>
+                    Pizzas
+                </Link>
                 </li>
                 <li>
                     <Link
