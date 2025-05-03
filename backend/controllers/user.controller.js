@@ -7,9 +7,10 @@ import crypto from 'crypto';
 import { validationResult } from 'express-validator';
 import blacklistTokenModel from '../models/blacklistToken.model.js';
 
+
 dotenv.config();
 
-export const registerUser = async (req, res) => {
+export const registerUser = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
@@ -73,7 +74,7 @@ export const registerUser = async (req, res) => {
 };
 
 
-export const loginUser = async (req, res) => {
+export const loginUser = async (req, res, next) => {
   const { email, password } = req.body;
 
   try {
@@ -111,7 +112,7 @@ export const loginUser = async (req, res) => {
 };
 
 
-export const logoutUser = async (req, res) => {
+export const logoutUser = async (req, res, next) => {
   try{
     const token = req.cookies.token || (req.headers.authorization && req.headers.authorization.split(' ')[1]);; // Get the token from cookies
     if (!token) {
@@ -131,23 +132,78 @@ export const logoutUser = async (req, res) => {
   }
 }
 
-export const userProfile = async (req, res) => {
+export const userProfile = async (req, res, next) => {
   try {
-    const token = req.cookies.token || (req.headers.authorization && req.headers.authorization.split(' ')[1]);; // Get the token from cookies
-    if (!token) {
-      return res.status(401).json({ message: 'Unauthorized' });
+      if (!req.user) {
+          return res.status(404).json({ message: 'User not found' });
+      }
+
+      res.status(200).json({ user: req.user });
+  } catch (error) {
+      console.error('Error in userProfile:', error);
+      res.status(500).json({ message: 'Internal server error' });
+  }
+};
+
+export const GetAllUsers = async (req, res, next) => {
+  try {
+    const users = await userModel.find({}).select('-password -emailVerificationToken -__v').sort({ createdAt: -1 });
+    res.status(200).json(users);
+  } catch (error) {
+    console.error('Error in GetAllUsers:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+}
+
+export const GetUserById = async (req, res, next) => { 
+  const { id } = req.params;
+  try {
+    const user = await userModel.findById(id).select('-password -emailVerificationToken -__v');
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
     }
+    res.status(200).json(user);
+  } catch (error) {
+    console.error('Error in GetUserById:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+}
 
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    const user = await userModel.findById(decoded.id).select('-password'); // Exclude password from the response
-
+export const UpdateUser = async (req, res, next) => {
+  const { id } = req.params;
+  const { name, email, role } = req.body;
+  try {
+    const user = await userModel.findById(id);
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
 
-    res.status(200).json(user);
+    user.name = name || user.name;
+    user.email = email || user.email;
+    user.role = role || user.role;
+
+    await user.save();
+    res.status(200).json({ message: 'User updated successfully' });
   } catch (error) {
-    console.error('Error in userProfile:', error);
+    console.error('Error in UpdateUser:', error);
     res.status(500).json({ message: 'Internal server error' });
   }
 }
+
+export const DeleteUser = async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const user = await userModel.findById(id);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Use deleteOne() to delete the user
+    await user.deleteOne();
+
+    res.status(200).json({ message: 'User deleted successfully' });
+  } catch (error) {
+    console.error('Error in DeleteUser:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+};

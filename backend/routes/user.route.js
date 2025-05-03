@@ -1,7 +1,11 @@
 import express from 'express';
-import { registerUser, loginUser, logoutUser, userProfile } from '../controllers/user.controller.js';
+import { registerUser, loginUser, logoutUser, userProfile, GetAllUsers, GetUserById, UpdateUser, DeleteUser} from '../controllers/user.controller.js';
 import { verifyEmail } from '../controllers/email.controller.js';
 import { body } from 'express-validator';
+import { authMiddleware  } from '../middlewares/auth.middleware.js';
+import userModel from '../models/user.model.js';
+import { forgotPassword, resetPassword } from '../controllers/forgotpassword.controller.js';
+
 
 const userRouter = express.Router();
 
@@ -23,11 +27,20 @@ userRouter.post('/login', loginUser);
 
 userRouter.get('/verify/:token', verifyEmail);
 
-userRouter.get('/logout', logoutUser);
+userRouter.get('/logout', authMiddleware ,logoutUser);
 
-userRouter.get('/profile', userProfile) //error: userProfile is not a function
+userRouter.get('/profile', authMiddleware ,userProfile) //error: userProfile is not a function
+
+userRouter.get('/allUsers',GetAllUsers)
+
+userRouter.get('/user/:id',GetUserById)
+
+userRouter.put('/updateUser/:id',UpdateUser)
+
+userRouter.delete('/deleteUser/:id',DeleteUser)
 
 
-
+userRouter.post('/forgotpassword', forgotPassword);
+userRouter.put('/resetpassword/:token', resetPassword);
 // Export the router
 export default userRouter;

@@ -40,6 +40,12 @@ const userSchema = new mongoose.Schema(
     emailVerificationToken: {
       type: String,
     },
+    passwordResetToken: {
+      type: String,
+    },
+    passwordResetExpires: {
+      type: Date,
+    }
   },
   {
     minimize: false, // Allow empty objects in cartData
