@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import "./navbar.css"; // Assuming you have a CSS file for styling
 import { assets } from "../../assets/assets"; // Adjust the path as necessary  
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
     const [activeLink, setActiveLink] = useState("#dashboard"); // Default active link
@@ -10,6 +12,23 @@ const Navbar = () => {
         setActiveLink(link); // Update the active link
     };
 
+    const handleLogout = () => {
+        try{
+            const token = localStorage.getItem("token"); // Get the token from local storage
+            if (token) {
+                axios.post("http://localhost:4000/user/logout", {}, {
+                    headers: {
+                        Authorization: `Bearer ${token}` // Include the token in the request header
+                    }
+                });
+            }
+            localStorage.removeItem("token"); // Remove the token from local storage
+            localStorage.removeItem("user"); // Remove the user data from local storage
+        }
+        catch (error) {
+            console.error("Logout failed:", error); // Log any errors that occur during logout
+        }  
+    }
     return (
         <nav className="navbar">
             <img src={assets.logo} alt="Logo" className="logo" />
@@ -77,9 +96,8 @@ const Navbar = () => {
                 </li>
                 <li>
                     <Link
-                        to="#logout"
                         className={`nav-link ${activeLink === "#logout" ? "active" : ""}`}
-                        onClick={() => handleLinkClick("#logout")}
+                        onClick={() => handleLogout()}
                     >
                         Logout
                     </Link>
