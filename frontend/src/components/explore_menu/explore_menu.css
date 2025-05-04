@@ -1,0 +1,109 @@
+/* General Styling for Explore Menu */
+.explore-menu {
+    padding: 60px 30px;
+    text-align: center;
+    background: linear-gradient(135deg, #f3f4f6, #ffffff);
+    border-radius: 15px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    margin: 30px auto;
+    max-width: 1200px;
+    transition: all 0.3s ease;
+}
+
+.explore-menu:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.explore-menu h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
+
+.explore-menu-text {
+    font-size: 1.3rem;
+    color: #7f8c8d;
+    margin-bottom: 40px;
+    line-height: 1.8;
+}
+
+/* Menu Items Grid */
+.menu-items {
+    display: flex;
+    flex-direction: row; /* Changed to row to place items side by side */
+    flex-wrap: wrap; /* Allow wrapping for responsiveness */
+    justify-content: center; /* Center the items horizontally */
+    gap: 25px;
+    margin-top: 20px;
+}
+
+/* Individual Menu Item */
+.menu-item {
+    background: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    width: 100%;
+    max-width: 500px; /* Keep the same max-width as before */
+}
+
+/* Fix for the image inside menu-item */
+.menu-item img {
+    width: 100%;
+    height: 220px; /* Keep the same height as before */
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.menu-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.menu-item:hover img {
+    transform: scale(1.1);
+}
+
+/* Menu Item Name */
+.menu-name {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #34495e;
+    text-align: center;
+    padding: 20px 15px;
+    background: #ecf0f1;
+    border-top: 2px solid #bdc3c7;
+    margin: 0;
+    text-transform: capitalize;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.menu-item:hover .menu-name {
+    background: green;
+    color: #ffffff;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .explore-menu {
+        padding: 40px 15px;
+    }
+
+    .menu-name {
+        font-size: 1.3rem;
+    }
+
+    .menu-item img {
+        height: 180px; /* Keep the same responsive height adjustment */
+    }
+
+    .menu-item {
+        max-width: 400px; /* Slightly reduce max-width for smaller screens */
+    }
+}

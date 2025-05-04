@@ -13,6 +13,8 @@ import Home from './pages/customer/home';
 import AdminLogin from './components/admin_login/admin_login';
 import UserNavbar from './components/user_navbar/user_navbar';
 import Contact from './pages/contact/contact';
+import ExploreMenu from './components/explore_menu/explore_menu';
+import Footer from './components/Footer/Footer';
 
 const isAuthenticated = () => {
   return !!localStorage.getItem("token"); // Check if token exists
@@ -39,10 +41,9 @@ const App = () => {
         <Routes>
           {/* Frontend */}
           <Route path="/" element={<Home />} />
-          <Route path="/about" element={<h1>About</h1>} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/order" element={<h1>Orders</h1>} />
-          <Route path="/menu" element={<h1>menu</h1>} />
+          <Route path="/menu" element={<ExploreMenu/>} />
           <Route path="/register" element={<h1>Register</h1>} />
           <Route path="/login" element={<h1>Login</h1>} />
 
@@ -58,9 +59,10 @@ const App = () => {
             <Route path="user/user/:id" element={<ProtectedRoute><UserUpdate /></ProtectedRoute>} />            
           </Route>
         </Routes>
+        {!isAdminRoute && <Footer/>} {/* Render Footer only on non-admin routes */}
       </div>
     </div>
-  );
+  ); 
 };
 
 export default App;

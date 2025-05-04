@@ -1,6 +1,7 @@
 import React from "react";
 import "./Header.css";
 import logo from "../../assets/logo.png"; // Temporary logo (replace with your actual logo)
+import { Link } from "react-router-dom";
 
 const Header = () => {
     return (
@@ -8,7 +9,7 @@ const Header = () => {
             <div className="header-contents">
                 <h2>Order Your Favourite Pizza Here</h2>
                 <p>Welcome to PizzaCraft, where we serve the best pizzas in town!</p>
-                <button>View Menu</button>
+                <Link to="/menu" className="explore-menu-button">Explore Menu</Link>
             </div>
         </div>
     );

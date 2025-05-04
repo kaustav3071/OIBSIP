@@ -3,7 +3,6 @@ import "./navbar.css"; // Assuming you have a CSS file for styling
 import { assets } from "../../assets/assets"; // Adjust the path as necessary  
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
     const [activeLink, setActiveLink] = useState("#dashboard"); // Default active link

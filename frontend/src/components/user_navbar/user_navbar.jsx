@@ -17,7 +17,6 @@ const UserNavbar = () => {
         {/* Navigation Links */}
         <div className="user-navbar__links">
           <a href="/">Home</a>
-          <a href="/about">About</a>
           <a href="/contact">Contact</a>
           <a href="/order">Orders</a>
           <a href="/menu">Menu</a>
