@@ -15,6 +15,8 @@ import UserNavbar from './components/user_navbar/user_navbar';
 import Contact from './pages/contact/contact';
 import ExploreMenu from './components/explore_menu/explore_menu';
 import Footer from './components/Footer/Footer';
+import InventoryDashboard from './pages/inventory/inventory_dashboard/inventory';
+import UpdateInventory from './pages/inventory/update_inventory/update_inventory';
 
 const isAuthenticated = () => {
   return !!localStorage.getItem("token"); // Check if token exists
@@ -56,7 +58,9 @@ const App = () => {
             <Route path="pizza_dashboard/get" element={<ProtectedRoute><GetAll /></ProtectedRoute>} />
             <Route path="pizza_dashboard/update/:id" element={<ProtectedRoute><UpdatePizza /></ProtectedRoute>} />
             <Route path="users" element={<ProtectedRoute><UserDashboard /></ProtectedRoute>} />
-            <Route path="user/user/:id" element={<ProtectedRoute><UserUpdate /></ProtectedRoute>} />            
+            <Route path="user/user/:id" element={<ProtectedRoute><UserUpdate /></ProtectedRoute>} />
+            <Route path="inventory" element={<ProtectedRoute><InventoryDashboard/></ProtectedRoute>} /> 
+            <Route path="inventory/update" element={<ProtectedRoute><UpdateInventory/></ProtectedRoute>} />         
           </Route>
         </Routes>
         {!isAdminRoute && <Footer/>} {/* Render Footer only on non-admin routes */}

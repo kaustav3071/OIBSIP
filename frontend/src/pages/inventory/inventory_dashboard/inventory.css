@@ -1,0 +1,122 @@
+/* General styling for the inventory dashboard */
+.inventory-dashboard {
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    background: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .inventory-dashboard h1 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #2c3e50;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  
+  /* Inventory content container */
+  .inventory-content {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+  
+  /* Category section (Bases, Sauces, etc.) */
+  .category-section {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+  
+  .category-section h2 {
+    font-size: 1.8rem;
+    color: #34495e;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #ecf0f1;
+    padding-bottom: 5px;
+  }
+  
+  /* Inventory table styling */
+  .inventory-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1rem;
+  }
+  
+  .inventory-table th,
+  .inventory-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ecf0f1;
+  }
+  
+  .inventory-table th {
+    background: #2c3e50;
+    color: #ffffff;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  
+  .inventory-table td {
+    color: #34495e;
+  }
+  
+  /* Highlight low stock items */
+  .low-stock {
+    background: #ffdddd;
+    color: #c0392b;
+    font-weight: bold;
+  }
+  
+  /* Error message styling */
+  .error-message {
+    color: #c0392b;
+    text-align: center;
+    font-size: 1.2rem;
+    margin: 20px 0;
+  }
+  
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .inventory-dashboard {
+      padding: 20px 10px;
+    }
+  
+    .inventory-dashboard h1 {
+      font-size: 2rem;
+    }
+  
+    .category-section h2 {
+      font-size: 1.5rem;
+    }
+  
+    .inventory-table th,
+    .inventory-table td {
+      padding: 8px 10px;
+      font-size: 0.9rem;
+    }
+  }
+
+
+/* Update button styling */
+.update-btn {
+  padding: 8px 16px;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  background-color: #4caf50; /* Green for update */
+  color: white;
+}
+
+.update-btn:hover {
+  background-color: #45a049;
+  transform: translateY(-2px);
+}
+

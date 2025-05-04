@@ -1,5 +1,5 @@
 import express from 'express';
-import { getInventory, updateInventory, checkLowStock, reduceStock } from '../controllers/inventories.controller.js';
+import { getInventory, updateInventory, checkLowStock, reduceStock, sendLowStockEmail } from '../controllers/inventories.controller.js';
 
 const router = express.Router();
 
@@ -14,5 +14,8 @@ router.get('/low-stock', checkLowStock);
 
 // Reduce stock after an order
 router.post('/reduce-stock', reduceStock);
+
+// Send low stock email to admin
+router.post('/send-low-stock-email', sendLowStockEmail);
 
 export default router;
