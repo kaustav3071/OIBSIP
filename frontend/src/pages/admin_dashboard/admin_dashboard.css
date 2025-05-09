@@ -1,0 +1,215 @@
+/* General Styling */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f4f4f9;
+  }
+  
+  /* Admin Dashboard Container */
+  .admin-dashboard {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  /* Header Section */
+  .dashboard-header {
+    margin-bottom: 30px;
+  }
+  
+  .dashboard-header h1 {
+    font-size: 2.5rem;
+    color: #2c3e50;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+  }
+  
+  .dashboard-header p {
+    font-size: 1.2rem;
+    color: #555;
+  }
+  
+  /* Analytics Section */
+  .dashboard-analytics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+  }
+  
+  .analytics-card {
+    background: linear-gradient(135deg, #2196f3, #42a5f5);
+    color: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .analytics-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+  
+  .analytics-card p {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  /* Dashboard Content */
+  .dashboard-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+  }
+  
+  /* Dashboard Cards */
+  .dashboard-card {
+    background: linear-gradient(135deg, #4caf50, #66bb6a);
+    color: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .dashboard-card h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+  
+  .dashboard-card p {
+    font-size: 1rem;
+    margin-bottom: 15px;
+  }
+  
+  .dashboard-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Dashboard Links */
+  .dashboard-link {
+    display: inline-block;
+    padding: 10px 15px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #ffffff;
+    background: #2c3e50;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+  
+  .dashboard-link:hover {
+    background-color: #1a242f;
+  }
+  
+  /* Quick Actions Section */
+  .dashboard-actions {
+    margin-top: 40px;
+  }
+  
+  .dashboard-actions h2 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    color: #2c3e50;
+  }
+  
+  .actions-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+  }
+  
+  .action-button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    background: #ff5722;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .action-button:hover {
+    background-color: #e64a19;
+  }
+  
+  /* Footer Section */
+  .dashboard-footer {
+    margin-top: 40px;
+    padding: 10px;
+    background: #2c3e50;
+    color: white;
+    border-radius: 8px;
+  }
+  
+  .dashboard-footer p {
+    margin: 0;
+    font-size: 0.9rem;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .dashboard-header h1 {
+      font-size: 2rem;
+    }
+  
+    .dashboard-header p {
+      font-size: 1rem;
+    }
+  
+    .analytics-card h3 {
+      font-size: 1rem;
+    }
+  
+    .analytics-card p {
+      font-size: 1.2rem;
+    }
+  
+    .dashboard-card h2 {
+      font-size: 1.2rem;
+    }
+  
+    .dashboard-card p {
+      font-size: 0.9rem;
+    }
+  
+    .dashboard-link {
+      font-size: 0.9rem;
+    }
+  
+    .action-button {
+      font-size: 0.9rem;
+    }
+  }
+  .action-button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    background: #ff5722;
+    border: none;
+    border-radius: 8px;
+    text-align: center;
+    text-decoration: none; /* Remove underline for links */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .action-button:hover {
+    background-color: #e64a19;
+  }
