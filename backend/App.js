@@ -33,7 +33,7 @@ app.use('/order', OrderRouter)
 app.use('/', contactRouter)
 
 
-app.use('/razorpay', RazorpayRouter)
+app.use('/payment', RazorpayRouter)
 
 export default app;
 
