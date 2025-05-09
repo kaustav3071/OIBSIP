@@ -26,6 +26,8 @@ const UserUpdate = () => {
               name: response.data.name,
               email: response.data.email,
               password: response.data.password,
+              role: response.data.role,
+              verified: response.data.isVerified,
             });
           } else {
             toast.error("User not found!");
@@ -50,9 +52,9 @@ const UserUpdate = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.put(`${url}/update/${id}`, data);
+            await axios.put(`${url}/updateUser/${id}`, data);
             toast.success("User updated successfully!");
-            navigate("/admin/users/get");
+            navigate("/admin/users");
         } catch (error) {
             console.error(error);
             toast.error("Error updating user");
@@ -84,15 +86,15 @@ const UserUpdate = () => {
                     />
                 </div>
                 <div className="form-group">
-                    <label>Password:</label>
-                    <input
-                        type="password"
-                        name="password"
-                        value={data.password}
-                        onChange={handleChange}
-                        required
+                    <label>Role:</label>
+                    <input name="role" value={data.role} onChange={handleChange} required readOnly
                     />
                 </div>
+                <div className="form-group">
+                    <label>Verified:</label>
+                    <input name="verified" value={data.verified} onChange={handleChange} required readOnly
+                    />
+                </div>              
                 <button type="submit" className="btn-submit">Update</button>
             </form>
         </div>

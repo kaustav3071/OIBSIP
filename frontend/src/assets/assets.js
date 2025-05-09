@@ -4,20 +4,26 @@ import pizza_image from './pizza_image.jpg';
 import shopping_cart from './shopping-basket.png';
 import supreme from './supreme.jpg';
 import pepperoni from './peporoini.jpg';
-import chicken from './chicken.jpg';
 import corn from './corn.jpg';
 import farm_house from './farm house.jpg';
 import margerita from './margerita.jpg';
 import onion from './onion.jpg';
 import capsicum from './capsicum.jpg';
+import add from './add-button.png';
+import remove from './delete.png'
+import playstore from './playstore.png';
+import appstore from './app-store.png';
 
 export const assets = {
     logo,
     profile,
     pizza_image,
-    shopping_cart
-
-}
+    shopping_cart,
+    add,
+    remove,
+    playstore,
+    appstore
+};
 
 
 export const menu_items = [
@@ -28,10 +34,6 @@ export const menu_items = [
     {
         menu_name: "Pepperoni",
         menu_image: pepperoni
-    },
-    {
-        menu_name: "Chicken",
-        menu_image: chicken
     },
     {
         menu_name: "Corn",

@@ -1,94 +1,117 @@
 /* Main container for the pizza dashboard */
 .pizza-dashboard {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    padding: 40px;
-    background: linear-gradient(135deg, #f9f9f9, #ffffff); /* Subtle gradient background */
-    border-radius: 16px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Enhanced shadow */
-    margin: 20px auto;
-    max-width: 1200px;
+    padding: 60px;
+    background: linear-gradient(135deg, #fdfdfd, #f5f5f5);
+    border-radius: 24px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+    margin: 40px auto;
+    max-width: 1600px;
+    flex-wrap: wrap;
+    gap: 60px;
 }
 
 /* Left section: Pizza image */
 .pizza-image img {
-    width: 350px;
+    width: 100%;
+    max-width: 700px; /* Much larger */
     height: auto;
-    border-radius: 16px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Shadow for the image */
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 30px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    border: 5px solid #ffffff;
 }
 
 .pizza-image img:hover {
-    transform: scale(1.05); /* Slight zoom effect on hover */
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3); /* Stronger shadow on hover */
+    transform: scale(1.08);
+    box-shadow: 0 25px 45px rgba(0, 0, 0, 0.4);
 }
 
 /* Right section: Options */
 .pizza-options {
     flex: 1;
-    margin-left: 40px;
+    min-width: 350px;
     text-align: center;
 }
 
 .options-title {
-    font-size: 2rem;
-    font-weight: bold;
-    margin-bottom: 30px;
-    color: #333;
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 50px;
+    color: #222;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
 }
 
 /* Options list */
 .options-list {
     display: flex;
-    justify-content: space-around;
-    gap: 20px;
-    flex-wrap: wrap; /* Wrap options on smaller screens */
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
 }
 
 .option-item {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 200px;
-    height: 100px;
-    background: linear-gradient(135deg, #4caf50, #45a049); /* Gradient background */
-    color: white;
-    font-size: 1.2rem;
+    width: 280px;
+    height: 120px;
+    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+    color: #fff;
+    font-size: 1.6rem;
     font-weight: bold;
     text-decoration: none;
-    border-radius: 12px;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Shadow for buttons */
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
 }
 
 .option-item:hover {
-    transform: translateY(-5px); /* Lift effect on hover */
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3); /* Stronger shadow on hover */
-    background: linear-gradient(135deg, #45a049, #4caf50); /* Reverse gradient on hover */
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(135deg, #38f9d7 0%, #43e97b 100%);
 }
 
-@media (max-width: 768px) {
+/* Responsive Design */
+@media (max-width: 992px) {
     .pizza-dashboard {
         flex-direction: column;
-        align-items: center;
-        padding: 20px;
+        padding: 40px;
+    }
+
+    .pizza-image img {
+        max-width: 100%;
     }
 
     .pizza-options {
-        margin-left: 0;
-        margin-top: 20px;
+        margin-top: 40px;
     }
 
     .options-list {
         flex-direction: column;
-        gap: 15px;
+        gap: 25px;
     }
 
     .option-item {
-        width: 100%; /* Full width for smaller screens */
+        width: 100%;
+        max-width: 320px;
+    }
+
+    .options-title {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .options-title {
+        font-size: 2rem;
+    }
+
+    .option-item {
+        font-size: 1.3rem;
+        height: 100px;
     }
 }

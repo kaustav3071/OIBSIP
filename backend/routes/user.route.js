@@ -1,5 +1,5 @@
 import express from 'express';
-import { registerUser, loginUser, logoutUser, userProfile, GetAllUsers, GetUserById, UpdateUser, DeleteUser} from '../controllers/user.controller.js';
+import { registerUser, loginUser, logoutUser, userProfile, GetAllUsers, GetUserById, UpdateUser, DeleteUser, updateCart} from '../controllers/user.controller.js';
 import { verifyEmail } from '../controllers/email.controller.js';
 import { body } from 'express-validator';
 import { authMiddleware  } from '../middlewares/auth.middleware.js';
@@ -37,8 +37,10 @@ userRouter.get('/user/:id',GetUserById)
 
 userRouter.put('/updateUser/:id',UpdateUser)
 
-userRouter.delete('/delete/:id',DeleteUser);
+userRouter.delete('/delete/:id',DeleteUser);  
 
+// Update cart data
+userRouter.put('/update_cart', authMiddleware, updateCart);
 
 userRouter.post('/forgotpassword', forgotPassword);
 userRouter.put('/resetpassword/:token', resetPassword);

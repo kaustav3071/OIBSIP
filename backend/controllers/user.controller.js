@@ -7,7 +7,6 @@ import crypto from 'crypto';
 import { validationResult } from 'express-validator';
 import blacklistTokenModel from '../models/blacklistToken.model.js';
 
-
 dotenv.config();
 
 export const registerUser = async (req, res, next) => {
@@ -32,7 +31,7 @@ export const registerUser = async (req, res, next) => {
       name,
       email,
       password: hashedPassword,
-      role: role || 'user', // Default to 'user' if no role is provided
+      role: role || 'user',
       emailVerificationToken,
       isVerified: false,
     });
@@ -74,12 +73,11 @@ export const registerUser = async (req, res, next) => {
   }
 };
 
-
 export const loginUser = async (req, res, next) => {
   const { email, password } = req.body;
 
   try {
-    const user = await userModel.findOne({ email }).select('+password'); // Ensure password is included in the query resul
+    const user = await userModel.findOne({ email }).select('+password');
     if (!user) {
       return res.status(400).json({ message: 'Invalid email' });
     }
@@ -94,8 +92,6 @@ export const loginUser = async (req, res, next) => {
     }
 
     const token = user.generateAuthToken();
-    res.cookie('token', token)
-
     res.status(200).json({
       message: 'Login successful',
       token,
@@ -104,6 +100,7 @@ export const loginUser = async (req, res, next) => {
         name: user.name,
         email: user.email,
         role: user.role,
+        cartData: user.cartData, // Include cartData in the response
       },
     });
   } catch (error) {
@@ -112,37 +109,62 @@ export const loginUser = async (req, res, next) => {
   }
 };
 
-
 export const logoutUser = async (req, res, next) => {
-  try{
-    const token = req.cookies.token || (req.headers.authorization && req.headers.authorization.split(' ')[1]);; // Get the token from cookies
+  try {
+    const token = req.headers.authorization?.split(' ')[1];
     if (!token) {
       return res.status(400).json({ message: 'No token provided' });
     }
 
-    // Add the token to the blacklist
     const blacklistedToken = new blacklistTokenModel({ token });
     await blacklistedToken.save();
 
-    res.clearCookie('token'); // Clear the cookie
     res.status(200).json({ message: 'Logout successful' });
-  }
-  catch (error) {
+  } catch (error) {
     console.error('Error in logoutUser:', error);
     res.status(500).json({ message: 'Internal server error' });
   }
-}
+};
 
 export const userProfile = async (req, res, next) => {
   try {
-      if (!req.user) {
-          return res.status(404).json({ message: 'User not found' });
-      }
+    if (!req.user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
 
-      res.status(200).json({ user: req.user });
+    res.status(200).json({ user: req.user });
   } catch (error) {
-      console.error('Error in userProfile:', error);
-      res.status(500).json({ message: 'Internal server error' });
+    console.error('Error in userProfile:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+};
+
+export const updateCart = async (req, res, next) => {
+  try {
+    const userId = req.user._id; // From auth middleware
+    const { cartData } = req.body;
+
+    // Validate cartData
+    if (!cartData || typeof cartData !== 'object') {
+      return res.status(400).json({ message: 'Invalid cart data provided' });
+    }
+
+    const user = await userModel.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Update the cartData field
+    user.cartData = cartData;
+    await user.save();
+
+    res.status(200).json({
+      message: 'Cart updated successfully',
+      cartData: user.cartData,
+    });
+  } catch (error) {
+    console.error('Error in updateCart:', error);
+    res.status(500).json({ message: 'Internal server error' });
   }
 };
 
@@ -154,7 +176,7 @@ export const GetAllUsers = async (req, res, next) => {
     console.error('Error in GetAllUsers:', error);
     res.status(500).json({ message: 'Internal server error' });
   }
-}
+};
 
 export const GetUserById = async (req, res, next) => { 
   const { id } = req.params;
@@ -168,7 +190,7 @@ export const GetUserById = async (req, res, next) => {
     console.error('Error in GetUserById:', error);
     res.status(500).json({ message: 'Internal server error' });
   }
-}
+};
 
 export const UpdateUser = async (req, res, next) => {
   const { id } = req.params;
@@ -189,7 +211,7 @@ export const UpdateUser = async (req, res, next) => {
     console.error('Error in UpdateUser:', error);
     res.status(500).json({ message: 'Internal server error' });
   }
-}
+};
 
 export const DeleteUser = async (req, res, next) => {
   const { id } = req.params;
@@ -199,9 +221,7 @@ export const DeleteUser = async (req, res, next) => {
       return res.status(404).json({ message: 'User not found' });
     }
 
-    // Use deleteOne() to delete the user
     await user.deleteOne();
-
     res.status(200).json({ message: 'User deleted successfully' });
   } catch (error) {
     console.error('Error in DeleteUser:', error);

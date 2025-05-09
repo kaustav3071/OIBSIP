@@ -8,6 +8,9 @@ import cookieParser from 'cookie-parser';
 import PizzaRouter from './routes/pizza.route.js';
 import UserRouter from './routes/user.route.js';
 import InventoryRouter from './routes/inventories.route.js';
+import OrderRouter from './routes/order.route.js';
+import contactRouter from './routes/contact.routes.js';
+import RazorpayRouter from './routes/razorpay.route.js';
 
 app.use(cookieParser());
 connectDB();
@@ -23,6 +26,14 @@ app.use('/images', express.static('uploads'));
 app.use('/user', UserRouter)
 
 app.use('/inventory', InventoryRouter)
+
+app.use('/order', OrderRouter)
+
+
+app.use('/', contactRouter)
+
+
+app.use('/razorpay', RazorpayRouter)
 
 export default app;
 

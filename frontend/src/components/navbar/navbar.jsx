@@ -54,15 +54,6 @@ const Navbar = () => {
                 </li>
                 <li>
                     <Link
-                        to="/admin/settings"
-                        className={`nav-link ${activeLink === "#settings" ? "active" : ""}`}
-                        onClick={() => handleLinkClick("#settings")}
-                    >
-                        Settings
-                    </Link>
-                </li>
-                <li>
-                    <Link
                         to="/admin/orders"
                         className={`nav-link ${activeLink === "#orders" ? "active" : ""}`}
                         onClick={() => handleLinkClick("#orders")}

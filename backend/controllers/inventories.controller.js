@@ -156,7 +156,6 @@ export const sendLowStockEmail = async (req, res) => {
     };
 
     await transporter.sendMail(mailOptions);
-    console.log('Low stock email sent successfully:', mailOptions);
     return res.status(200).json({ message: "Low stock email sent successfully.", lowStockItems });
   } catch (error) {
     return res.status(500).json({ message: "Error sending low stock email.", error: error.message });
@@ -236,16 +235,15 @@ export const checkLowStock = async (req, res) => {
 };
 
 // Reduce stock after an order (e.g., when a pizza is ordered)
-export const reduceStock = async (req, res) => {
+// Reduce stock after an order (e.g., when a pizza is ordered)
+export const reduceStock = async ({ base, sauce, cheese, veggies }) => {
   try {
-    const { base, sauce, cheese, veggies } = req.body;
-
     const inventory = await getInventoryDocument();
 
     if (base && inventory.bases.has(base)) {
       const baseDetails = inventory.bases.get(base);
       if (baseDetails.qty <= 0) {
-        return res.status(400).json({ message: `Base ${base} is out of stock` });
+        return { status: 400, message: `Base ${base} is out of stock` };
       }
       baseDetails.qty -= 1;
       inventory.bases.set(base, baseDetails);
@@ -254,7 +252,7 @@ export const reduceStock = async (req, res) => {
     if (sauce && inventory.sauces.has(sauce)) {
       const sauceDetails = inventory.sauces.get(sauce);
       if (sauceDetails.qty <= 0) {
-        return res.status(400).json({ message: `Sauce ${sauce} is out of stock` });
+        return { status: 400, message: `Sauce ${sauce} is out of stock` };
       }
       sauceDetails.qty -= 1;
       inventory.sauces.set(sauce, sauceDetails);
@@ -263,7 +261,7 @@ export const reduceStock = async (req, res) => {
     if (cheese && inventory.cheeses.has(cheese)) {
       const cheeseDetails = inventory.cheeses.get(cheese);
       if (cheeseDetails.qty <= 0) {
-        return res.status(400).json({ message: `Cheese ${cheese} is out of stock` });
+        return { status: 400, message: `Cheese ${cheese} is out of stock` };
       }
       cheeseDetails.qty -= 1;
       inventory.cheeses.set(cheese, cheeseDetails);
@@ -274,7 +272,7 @@ export const reduceStock = async (req, res) => {
         if (inventory.veggies.has(veggie)) {
           const veggieDetails = inventory.veggies.get(veggie);
           if (veggieDetails.qty <= 0) {
-            return res.status(400).json({ message: `Veggie ${veggie} is out of stock` });
+            return { status: 400, message: `Veggie ${veggie} is out of stock` };
           }
           veggieDetails.qty -= 1;
           inventory.veggies.set(veggie, veggieDetails);
@@ -283,8 +281,15 @@ export const reduceStock = async (req, res) => {
     }
 
     await inventory.save();
-    return res.status(200).json({ message: 'Stock updated successfully', inventory });
+    return { status: 200, message: 'Stock updated successfully', inventory };
   } catch (error) {
-    return res.status(500).json({ message: 'Error reducing stock', error: error.message });
+    return { status: 500, message: 'Error reducing stock', error: error.message };
   }
+};
+
+// Reduce stock endpoint for direct HTTP requests
+export const reduceStockEndpoint = async (req, res) => {
+  const { base, sauce, cheese, veggies } = req.body;
+  const result = await reduceStock({ base, sauce, cheese, veggies });
+  return res.status(result.status).json({ message: result.message, ...(result.inventory && { inventory: result.inventory }) });
 };

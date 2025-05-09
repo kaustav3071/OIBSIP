@@ -1,0 +1,125 @@
+.cart {
+    padding: 60px 30px;
+    text-align: center;
+    background: linear-gradient(135deg, #f3f4f6, #ffffff);
+    border-radius: 15px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    margin: 30px auto;
+    max-width: 1200px;
+  }
+  
+  .cart h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+  }
+  
+  .cart-items {
+    margin-top: 20px;
+  }
+  
+  .cart-items table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .cart-items th,
+  .cart-items td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ecf0f1;
+  }
+  
+  .cart-items th {
+    background: #2c3e50;
+    color: #ffffff;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+  }
+  
+  .cart-items td img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-right: 10px;
+    vertical-align: middle;
+  }
+  
+  .cart-items td button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin: 0 5px;
+  }
+  
+  .cart-items td button:first-child {
+    background: #e74c3c;
+    color: #ffffff;
+  }
+  
+  .cart-items td button:last-child {
+    background: #4caf50;
+    color: #ffffff;
+  }
+  
+  .remove-btn {
+    background: #e74c3c;
+    color: #ffffff;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  
+  .cart-items td button:disabled {
+    background: #bdc3c7;
+    cursor: not-allowed;
+  }
+  
+  @media (max-width: 768px) {
+    .cart {
+      padding: 40px 15px;
+    }
+  
+    .cart-items th,
+    .cart-items td {
+      font-size: 0.9rem;
+      padding: 10px;
+    }
+  
+    .cart-items td img {
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  .checkout {
+    display: inline-block;
+    background: linear-gradient(90deg, #ff6347, #ff4500);
+    color: #fff;
+    padding: 15px 40px;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    margin-top: 20px;
+}
+
+.checkout:hover {
+    background: linear-gradient(90deg, #e74c3c, #d43f2a);
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(231, 76, 60, 0.5);
+}

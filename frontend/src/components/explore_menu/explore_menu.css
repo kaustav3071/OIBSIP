@@ -1,109 +1,225 @@
-/* General Styling for Explore Menu */
 .explore-menu {
     padding: 60px 30px;
-    text-align: center;
-    background: linear-gradient(135deg, #f3f4f6, #ffffff);
-    border-radius: 15px;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-    margin: 30px auto;
-    max-width: 1200px;
-    transition: all 0.3s ease;
+    background: linear-gradient(145deg, #ffffff 0%, #f5f5f5 100%);
+    border-radius: 25px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    max-width: 1400px;
+    margin: 40px auto;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-.explore-menu:hover {
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+.explore-menu::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at top left, rgba(255, 99, 71, 0.1), transparent 50%);
+    pointer-events: none;
 }
 
 .explore-menu h1 {
-    font-size: 3rem;
-    font-weight: bold;
+    font-size: 3.5rem;
     color: #2c3e50;
-    margin-bottom: 15px;
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: 900;
     text-transform: uppercase;
     letter-spacing: 3px;
+    background: linear-gradient(90deg, #ff6347, #ff4500);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .explore-menu-text {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     color: #7f8c8d;
-    margin-bottom: 40px;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 50px;
     line-height: 1.8;
+    font-weight: 300;
+    font-style: italic;
 }
 
-/* Menu Items Grid */
 .menu-items {
-    display: flex;
-    flex-direction: row; /* Changed to row to place items side by side */
-    flex-wrap: wrap; /* Allow wrapping for responsiveness */
-    justify-content: center; /* Center the items horizontally */
-    gap: 25px;
-    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 35px;
+    padding: 30px;
 }
 
-/* Individual Menu Item */
 .menu-item {
     background: #ffffff;
-    border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
     overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    cursor: pointer;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    transition: transform 0.4s ease, box-shadow 0.4s ease, border 0.3s ease;
+    padding: 30px;
+    text-align: center;
     position: relative;
-    width: 100%;
-    max-width: 500px; /* Keep the same max-width as before */
-}
-
-/* Fix for the image inside menu-item */
-.menu-item img {
-    width: 100%;
-    height: 220px; /* Keep the same height as before */
-    object-fit: cover;
-    transition: transform 0.3s ease;
+    border: 2px solid transparent;
 }
 
 .menu-item:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transform: translateY(-12px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+    border: 2px solid #ff6347;
 }
 
-.menu-item:hover img {
+.menu-item img {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+.menu-item img:hover {
     transform: scale(1.1);
+    filter: brightness(1.15);
 }
 
-/* Menu Item Name */
 .menu-name {
-    font-size: 1.6rem;
-    font-weight: bold;
-    color: #34495e;
-    text-align: center;
-    padding: 20px 15px;
-    background: #ecf0f1;
-    border-top: 2px solid #bdc3c7;
-    margin: 0;
+    font-size: 1.9rem;
+    color: #ff4500;
+    margin: 15px 0;
+    font-weight: 700;
     text-transform: capitalize;
-    transition: background 0.3s ease, color 0.3s ease;
+    letter-spacing: 0.5px;
 }
 
-.menu-item:hover .menu-name {
-    background: green;
-    color: #ffffff;
+.menu-description {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 20px;
+    line-height: 1.7;
+    min-height: 80px;
+    font-weight: 400;
+}
+
+.menu-price {
+    font-size: 1.4rem;
+    color: #2ecc71;
+    font-weight: 600;
+    margin-bottom: 25px;
+}
+
+.add, .remove {
+    background: linear-gradient(90deg, #ff6347, #ff4500);
+    color: #fff;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    margin: 0 5px;
+}
+
+.remove {
+    background: linear-gradient(90deg, #95a5a6, #7f8c8d);
+}
+
+.add:hover {
+    background: linear-gradient(90deg, #e74c3c, #d43f2a);
+    transform: scale(1.1);
+    box-shadow: 0 5px 15px rgba(231, 76, 60, 0.5);
+}
+
+.remove:hover {
+    background: linear-gradient(90deg, #7f8c8d, #666);
+    transform: scale(1.1);
+    box-shadow: 0 5px 15px rgba(127, 140, 141, 0.5);
+}
+
+.pizza-item-counter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.item-count {
+    font-size: 1.3rem;
+    color: #2c3e50;
+    font-weight: 700;
+    min-width: 40px;
+    text-align: center;
+    background: #f1f2f6;
+    padding: 8px 12px;
+    border-radius: 20px;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .explore-menu {
-        padding: 40px 15px;
+    .explore-menu h1 {
+        font-size: 2.8rem;
     }
 
-    .menu-name {
-        font-size: 1.3rem;
+    .menu-items {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     }
 
     .menu-item img {
-        height: 180px; /* Keep the same responsive height adjustment */
+        height: 220px;
     }
 
-    .menu-item {
-        max-width: 400px; /* Slightly reduce max-width for smaller screens */
+    .explore-menu-text {
+        font-size: 1.2rem;
     }
+}
+
+@media (max-width: 480px) {
+    .explore-menu {
+        padding: 40px 20px;
+        margin: 20px auto;
+    }
+
+    .menu-items {
+        grid-template-columns: 1fr;
+    }
+
+    .menu-item img {
+        height: 200px;
+    }
+
+    .explore-menu h1 {
+        font-size: 2.2rem;
+    }
+
+    .explore-menu-text {
+        font-size: 1rem;
+    }
+}
+
+.explore-menu-button {
+    display: inline-block;
+    background: linear-gradient(90deg, #ff6347, #ff4500);
+    color: #fff;
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    margin: 10px 5px;
+}
+
+.explore-menu-button:hover {
+    background: linear-gradient(90deg, #e74c3c, #d43f2a);
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(231, 76, 60, 0.5);
 }

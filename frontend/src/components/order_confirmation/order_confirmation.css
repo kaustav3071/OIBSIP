@@ -1,0 +1,202 @@
+.order-confirmation {
+    padding: 60px 30px;
+    background: linear-gradient(145deg, #ffffff 0%, #f7f9fc 100%);
+    border-radius: 30px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+    max-width: 1200px;
+    margin: 40px auto;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+}
+
+.order-confirmation:hover {
+    transform: translateY(-5px);
+}
+
+.order-confirmation::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at top left, rgba(255, 99, 71, 0.15), transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.order-confirmation h1 {
+    font-size: 3.8rem;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    background: linear-gradient(90deg, #ff6347, #ff4500);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 1;
+}
+
+.order-confirmation p {
+    font-size: 1.5rem;
+    color: #7f8c8d;
+    margin-bottom: 40px;
+    font-style: italic;
+    position: relative;
+    z-index: 1;
+}
+
+.orders-table-wrapper {
+    overflow-x: auto;
+    margin-bottom: 30px;
+    position: relative;
+    z-index: 1;
+}
+
+.orders-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.orders-table thead {
+    background: linear-gradient(90deg, #ff6347, #ff4500);
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.orders-table th {
+    padding: 15px 20px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-align: left;
+}
+
+.orders-table th:first-child {
+    border-top-left-radius: 15px;
+}
+
+.orders-table th:last-child {
+    border-top-right-radius: 15px;
+}
+
+.orders-table tbody tr {
+    transition: background 0.3s ease;
+}
+
+.orders-table tbody tr:nth-child(even) {
+    background: #f9f9f9;
+}
+
+.orders-table tbody tr:hover {
+    background: #f1f3f5;
+}
+
+.orders-table td {
+    padding: 15px 20px;
+    font-size: 1.1rem;
+    color: #34495e;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.orders-table td:last-child {
+    border-bottom: none;
+}
+
+.order-confirmation-button {
+    background: linear-gradient(90deg, #ff6347, #ff4500);
+    color: #fff;
+    border: none;
+    padding: 15px 40px;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    margin-top: 30px;
+    position: relative;
+    z-index: 1;
+}
+
+.order-confirmation-button:hover {
+    background: linear-gradient(90deg, #e74c3c, #d43f2a);
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(231, 76, 60, 0.5);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .order-confirmation {
+        padding: 40px 20px;
+        max-width: 90%;
+    }
+
+    .order-confirmation h1 {
+        font-size: 3rem;
+    }
+
+    .orders-table th,
+    .orders-table td {
+        font-size: 1rem;
+        padding: 12px 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    .order-confirmation {
+        padding: 30px 15px;
+        margin: 20px auto;
+    }
+
+    .order-confirmation h1 {
+        font-size: 2.5rem;
+        letter-spacing: 2px;
+    }
+
+    .order-confirmation p {
+        font-size: 1.3rem;
+    }
+
+    .orders-table th,
+    .orders-table td {
+        font-size: 0.9rem;
+        padding: 10px 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .order-confirmation {
+        padding: 20px 10px;
+    }
+
+    .order-confirmation h1 {
+        font-size: 2rem;
+        letter-spacing: 1px;
+    }
+
+    .order-confirmation p {
+        font-size: 1.1rem;
+    }
+
+    .orders-table th,
+    .orders-table td {
+        font-size: 0.8rem;
+        padding: 8px 10px;
+    }
+
+    .order-confirmation-button {
+        width: 100%;
+        padding: 12px;
+        font-size: 1rem;
+    }
+}
