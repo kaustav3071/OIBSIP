@@ -1,60 +1,195 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./explore_menu.css";
-import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { assets } from "../../assets/assets";
 import { toast } from "react-toastify";
 
 const ExploreMenu = () => {
     const url = "http://localhost:4000/pizza";
     const [getAll, setGetAll] = useState([]);
     const navigate = useNavigate();
-    const [itemCounts, setItemCounts] = useState({}); // State to track counts for each pizza
+    const [itemCounts, setItemCounts] = useState({});
+    const [cart, setCart] = useState([]);
+    const [inventory, setInventory] = useState(null); // Add inventory state
+
+    const api = axios.create({
+        baseURL: 'http://localhost:4000',
+        timeout: 10000,
+    });
 
     const fetchAllPizzas = async () => {
         try {
-            const response = await axios.get(`${url}/getallpizzas`);
+            const response = await api.get(`${url}/getallpizzas`);
             if (response.status === 200) {
                 setGetAll(response.data);
             } else {
                 toast.error("Error fetching pizzas");
             }
         } catch (error) {
-            console.error(error);
+            console.error("Error fetching pizzas:", error.message, error.response?.data);
             toast.error("An error occurred while fetching pizzas");
         }
     };
 
-    useEffect(() => {
-        fetchAllPizzas();
-    }, []);
+    const fetchInventory = async () => {
+        try {
+            const response = await api.get("/inventory");
+            console.log("Fetched inventory in explore_menu:", response.data);
+            setInventory(response.data);
+        } catch (error) {
+            console.error("Error fetching inventory:", error.message, error.response?.data);
+            toast.error("Failed to load inventory.");
+        }
+    };
 
-    // UseEffect to handle cart updates and toasts after itemCounts changes
-    useEffect(() => {
-        if (Object.keys(itemCounts).length === 0) return; // Skip initial render
-
-        const cart = [];
-        getAll.forEach((pizza) => {
-            const count = itemCounts[pizza._id];
-            if (count && count > 0) {
-                cart.push({
-                    pizzaId: pizza._id,
-                    pizzaName: pizza.name,
-                    pizzaImage: pizza.image,
-                    price: pizza.price,
-                    quantity: count,
-                    base: "Regular",
-                    sauce: "Tomato",
-                    cheese: "Mozzarella",
-                    veggies: [],
-                });
+    const fetchCart = async () => {
+        try {
+            const token = localStorage.getItem("token");
+            if (!token) {
+                toast.error("Please log in to view your cart.");
+                navigate("/login");
+                return;
             }
-        });
-        localStorage.setItem("cart", JSON.stringify(cart));
-    }, [itemCounts, getAll]);
 
-    // Function to handle adding an item
+            const response = await api.get("/user/profile", {
+                headers: { Authorization: `Bearer ${token}` },
+            });
+            const userCart = response.data.user.cartData || [];
+
+            const validCart = userCart.filter(item => 
+                item.pizzaId && 
+                item.pizzaName && 
+                item.pizzaImage && 
+                item.price && 
+                item.quantity > 0 && 
+                item.base && 
+                item.sauce && 
+                item.cheese
+            );
+            setCart(validCart);
+
+            const counts = {};
+            validCart.forEach(item => {
+                counts[item.pizzaId] = item.quantity;
+            });
+            setItemCounts(counts);
+        } catch (error) {
+            console.error("Error fetching cart:", error.message, error.response?.data);
+            if (error.response?.status === 401) {
+                toast.error("Session expired. Please log in again.");
+                navigate("/login");
+            } else {
+                toast.error("Failed to load cart. Please try again.");
+            }
+        }
+    };
+
+    useEffect(() => {
+        const fetchData = async () => {
+            await Promise.all([fetchAllPizzas(), fetchInventory(), fetchCart()]);
+        };
+        fetchData();
+    }, [navigate]);
+
+    const updateCartInBackend = async (updatedCart) => {
+        try {
+            const token = localStorage.getItem("token");
+            if (!token) {
+                toast.error("Please log in to update your cart.");
+                navigate("/login");
+                return;
+            }
+
+            const response = await api.put(
+                "/user/update_cart",
+                { cartData: updatedCart },
+                {
+                    headers: { Authorization: `Bearer ${token}` },
+                }
+            );
+
+            setCart(response.data.cartData);
+            toast.success("Cart updated successfully!");
+        } catch (error) {
+            console.error("Error updating cart:", error.message, error.response?.data);
+            if (error.response?.status === 401) {
+                toast.error("Session expired. Please log in again.");
+                navigate("/login");
+            } else {
+                toast.error("Failed to update cart.");
+            }
+        }
+    };
+
+    useEffect(() => {
+        if (Object.keys(itemCounts).length === 0 && cart.length === 0) return;
+
+        const updateCartWithCounts = async () => {
+            try {
+                const token = localStorage.getItem("token");
+                const response = await api.get("/user/profile", {
+                    headers: { Authorization: `Bearer ${token}` },
+                });
+                const backendCart = response.data.user.cartData || [];
+
+                const updatedCart = [];
+                const pizzaMap = new Map(getAll.map(pizza => [pizza._id, pizza]));
+
+                // Get default cheese name from inventory
+                const defaultCheese = Object.keys(inventory?.cheeses || {}).find(
+                    key => key.toLowerCase() === "mozzarella"
+                ) || "mozzarella";
+
+                for (const pizzaId of Object.keys(itemCounts)) {
+                    const count = itemCounts[pizzaId];
+                    if (count <= 0) continue;
+
+                    const pizza = pizzaMap.get(pizzaId);
+                    if (!pizza) continue;
+
+                    const existingItem = backendCart.find(item => item.pizzaId === pizzaId);
+
+                    if (existingItem) {
+                        updatedCart.push({
+                            ...existingItem,
+                            quantity: count,
+                        });
+                    } else {
+                        const basePrice = inventory?.bases["Regular"]?.price || 40;
+                        const saucePrice = inventory?.sauces["Tomato"]?.price || 0;
+                        const cheesePrice = inventory?.cheeses[defaultCheese]?.price || 70;
+
+                        updatedCart.push({
+                            pizzaId: pizza._id,
+                            pizzaName: pizza.name,
+                            pizzaImage: pizza.image,
+                            price: pizza.price,
+                            originalPrice: pizza.price,
+                            quantity: count,
+                            base: "Regular",
+                            sauce: "Tomato",
+                            cheese: defaultCheese,
+                            veggies: [],
+                            basePrice,
+                            saucePrice,
+                            cheesePrice,
+                        });
+                    }
+                }
+
+                setCart(updatedCart);
+                await updateCartInBackend(updatedCart);
+            } catch (error) {
+                console.error("Error updating cart with counts:", error);
+                toast.error("Failed to sync cart.");
+            }
+        };
+
+        if (inventory) {
+            updateCartWithCounts();
+        }
+    }, [itemCounts, getAll, inventory]);
+
     const handleAddItem = (pizzaId) => {
         setItemCounts((prev) => {
             const newCounts = {
@@ -67,7 +202,6 @@ const ExploreMenu = () => {
         });
     };
 
-    // Function to handle removing an item
     const handleRemoveItem = (pizzaId) => {
         setItemCounts((prev) => {
             const newCounts = {
@@ -120,7 +254,6 @@ const ExploreMenu = () => {
                                     <button
                                         className="remove"
                                         onClick={() => handleRemoveItem(pizza._id)}
-                                        src={assets.remove}
                                         alt="Remove from cart"
                                     >
                                         Remove
@@ -145,4 +278,4 @@ const ExploreMenu = () => {
     );
 };
 
-export default ExploreMenu;
+export default ExploreMenu; 

@@ -8,8 +8,8 @@ import { body } from 'express-validator';
 const razorpayRouter = express.Router();
 
 // Route to create a Razorpay order
-razorpayRouter.post('/create_payment', authMiddleware, create_razorpayOrder);
-razorpayRouter.post('/verify_payment', authMiddleware, verifyPayment);
+razorpayRouter.post('/create-payment', authMiddleware, create_razorpayOrder);
+razorpayRouter.post('/verify-payment', authMiddleware, verifyPayment);
 razorpayRouter.get('/getkey', authMiddleware, Getkey);
 
 

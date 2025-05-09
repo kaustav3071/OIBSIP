@@ -7,7 +7,8 @@ import { reduceStock } from '../controllers/inventories.controller.js';
 // Create a new order
 export const createOrder = async (req, res) => {
   try {
-    const { base, sauce, cheese, veggies, pizzaId, quantity = 1 } = req.body;
+    const { base, sauce, cheese, veggies, pizzaId, quantity = 1 , razorpayOrderId} = req.body;
+    console.log("Received razorpayOrderId:", razorpayOrderId);
     const userId = req.user._id; // From auth middleware
 
     // Validate user
@@ -45,38 +46,34 @@ export const createOrder = async (req, res) => {
       return res.status(500).json({ message: 'Inventory not found.' });
     }
 
-    // Calculate prices for inventory items
-    const basePrice = (inventory.bases.get(base)?.price || 0) * quantity;
-    const saucePrice = (inventory.sauces.get(sauce)?.price || 0) * quantity;
-    const cheesePrice = (inventory.cheeses.get(cheese)?.price || 0) * quantity;
-    let veggiesPrice = 0;
-    for (const veggie of veggies) {
+  const basePrice = (inventory.bases.get(base)?.price || 0) * quantity;
+  const saucePrice = (inventory.sauces.get(sauce)?.price || 0) * quantity;
+  const cheesePrice = (inventory.cheeses.get(cheese)?.price || 0) * quantity;
+  let veggiesPrice = 0;
+  for (const veggie of veggies) {
       const veggiePrice = (inventory.veggies.get(veggie)?.price || 0) * quantity;
       veggiesPrice += veggiePrice;
-    }
+  }
 
-    // Adjust price for predefined pizza
-    let totalAmountINR = 0;
-    if (predefinedPizza) {
-      totalAmountINR = predefinedPizzaPrice * quantity;
+  let totalAmountINR = basePrice + saucePrice + cheesePrice + veggiesPrice;
+
+  // Adjust price for predefined pizza
+  if (predefinedPizza) {
       const defaultBasePrice = (inventory.bases.get('Regular')?.price || 0) * quantity;
       const defaultSaucePrice = (inventory.sauces.get('Tomato')?.price || 0) * quantity;
       const defaultCheesePrice = (inventory.cheeses.get('Mozzarella')?.price || 0) * quantity;
       const defaultInventoryCost = defaultBasePrice + defaultSaucePrice + defaultCheesePrice;
-      totalAmountINR -= defaultInventoryCost;
-      totalAmountINR += basePrice + saucePrice + cheesePrice + veggiesPrice;
-    } else {
-      totalAmountINR = basePrice + saucePrice + cheesePrice + veggiesPrice;
-    }
 
-    // Ensure total amount is at least 1 INR
-    if (totalAmountINR <= 0) {
+      totalAmountINR = predefinedPizza.price * quantity - defaultInventoryCost + totalAmountINR;
+  }
+
+  // Ensure total amount is at least 1 INR
+  if (totalAmountINR <= 0) {
       return res.status(400).json({ message: 'Total amount must be greater than 0.' });
-    }
+  }
 
-    // Convert INR to paise for consistency (even though we're not using Razorpay)
-    const totalAmount = totalAmountINR * 100;
-
+  // Convert INR to paise for consistency
+  const totalAmount = totalAmountINR * 100;
     // Create the order in the database
     const order = new OrderModel({
       userId,
@@ -91,6 +88,7 @@ export const createOrder = async (req, res) => {
       totalAmount,
       quantity,
       status: 'Order Received',
+      razorpayOrderId,
       pizzaId: pizzaId || null,
     });
 

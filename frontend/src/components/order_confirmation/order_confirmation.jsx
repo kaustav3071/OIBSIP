@@ -91,7 +91,7 @@ const OrderConfirmation = () => {
                   <td>{order.pizzaId?.name || "Custom Pizza"}</td>
                   <td>{order.base} (Rs {order.basePrice})</td>
                   <td>{order.sauce} (Rs {order.saucePrice})</td>
-                  <td>{order.cheese} (Rs {order.cheesePrice / 100})</td>
+                  <td>{order.cheese} (Rs {order.cheesePrice})</td>
                   <td>{order.veggies.join(", ") || "None"} (Rs {order.veggiesPrice})</td>
                   <td>{order.quantity}</td>
                   <td>Rs {order.totalAmount / 100}</td>

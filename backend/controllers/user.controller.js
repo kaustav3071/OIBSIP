@@ -6,6 +6,7 @@ import nodemailer from 'nodemailer';
 import crypto from 'crypto';
 import { validationResult } from 'express-validator';
 import blacklistTokenModel from '../models/blacklistToken.model.js';
+import mongoose from 'mongoose';
 
 dotenv.config();
 
@@ -100,7 +101,7 @@ export const loginUser = async (req, res, next) => {
         name: user.name,
         email: user.email,
         role: user.role,
-        cartData: user.cartData, // Include cartData in the response
+        cartData: user.cartData || [], // Ensure cartData is an array
       },
     });
   } catch (error) {
@@ -140,32 +141,52 @@ export const userProfile = async (req, res, next) => {
 };
 
 export const updateCart = async (req, res, next) => {
-  try {
-    const userId = req.user._id; // From auth middleware
-    const { cartData } = req.body;
+    try {
+        const userId = req.user._id;
+        const { cartData } = req.body;
 
-    // Validate cartData
-    if (!cartData || typeof cartData !== 'object') {
-      return res.status(400).json({ message: 'Invalid cart data provided' });
+        // Fetch inventory to calculate prices
+        const inventory = await mongoose.model('Inventory').findOne();
+        if (!inventory) {
+            return res.status(500).json({ message: 'Inventory not found.' });
+        }
+
+        const updatedCart = cartData.map((item) => {
+            const basePrice = inventory.bases.get(item.base)?.price || 0;
+            const saucePrice = inventory.sauces.get(item.sauce)?.price || 0;
+            const cheesePrice = inventory.cheeses.get(item.cheese)?.price || 0;
+            const veggiesPrice = (item.veggies || []).reduce((total, veggie) => {
+                return total + (inventory.veggies.get(veggie)?.price || 0);
+            }, 0);
+
+            const defaultBasePrice = inventory.bases.get('Regular')?.price || 40;
+            const defaultSaucePrice = inventory.sauces.get('Tomato')?.price || 0;
+            const defaultCheesePrice = inventory.cheeses.get('Mozzarella')?.price || 30;
+            const defaultInventoryCost = defaultBasePrice + defaultSaucePrice + defaultCheesePrice;
+
+            const basePizzaPrice = item.originalPrice || item.price || 0;
+            const adjustedPrice = basePizzaPrice - defaultInventoryCost + basePrice + saucePrice + cheesePrice + veggiesPrice;
+
+            return {
+                ...item,
+                price: adjustedPrice,
+            };
+        });
+
+        // Update the user's cart
+        const user = await userModel.findById(userId);
+        if (!user) {
+            return res.status(404).json({ message: 'User not found.' });
+        }
+
+        user.cartData = updatedCart;
+        await user.save();
+
+        res.status(200).json({ message: 'Cart updated successfully.', cartData: updatedCart });
+    } catch (error) {
+        console.error('Error updating cart:', error.message);
+        res.status(500).json({ message: 'Failed to update cart.', error: error.message });
     }
-
-    const user = await userModel.findById(userId);
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' });
-    }
-
-    // Update the cartData field
-    user.cartData = cartData;
-    await user.save();
-
-    res.status(200).json({
-      message: 'Cart updated successfully',
-      cartData: user.cartData,
-    });
-  } catch (error) {
-    console.error('Error in updateCart:', error);
-    res.status(500).json({ message: 'Internal server error' });
-  }
 };
 
 export const GetAllUsers = async (req, res, next) => {

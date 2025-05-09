@@ -7,6 +7,46 @@ import BlacklistToken from './blacklistToken.model.js';
 // Load environment variables
 dotenv.config();
 
+const cartItemSchema = new mongoose.Schema({
+  pizzaId: {
+    type: String,
+    required: true,
+  },
+  pizzaName: {
+    type: String,
+    required: true,
+  },
+  pizzaImage: {
+    type: String,
+    required: true,
+  },
+  price: {
+    type: Number,
+    required: true,
+  },
+  quantity: {
+    type: Number,
+    required: true,
+    min: 1,
+  },
+  base: {
+    type: String,
+    required: true,
+  },
+  sauce: {
+    type: String,
+    required: true,
+  },
+  cheese: {
+    type: String,
+    required: true,
+  },
+  veggies: {
+    type: [String],
+    default: [],
+  },
+});
+
 const userSchema = new mongoose.Schema(
   {
     name: {
@@ -17,7 +57,7 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
       unique: true,
-      match : [/.+\@.+\..+/, "Please enter a valid email"],
+      match: [/.+\@.+\..+/, "Please enter a valid email"],
     },
     password: {
       type: String,
@@ -30,8 +70,8 @@ const userSchema = new mongoose.Schema(
       default: 'user',
     },
     cartData: {
-        type: Object,
-        default: {},
+      type: [cartItemSchema],
+      default: [],
     },
     isVerified: {
       type: Boolean,
@@ -45,11 +85,10 @@ const userSchema = new mongoose.Schema(
     },
     passwordResetExpires: {
       type: Date,
-    }
+    },
   },
   {
-    minimize: false, // Allow empty objects in cartData
-    timestamps: true, // Automatically handles createdAt and updatedAt
+    timestamps: true,
   }
 );
 
@@ -74,20 +113,15 @@ userSchema.statics.hashPassword = async function (password) {
 // Check if token is blacklisted
 userSchema.statics.isTokenBlacklisted = async function (token) {
   try {
-      const blacklisted = await BlacklistToken.findOne({ token });
-      return blacklisted ? true : false;
+    const blacklisted = await BlacklistToken.findOne({ token });
+    return blacklisted ? true : false;
   } catch (error) {
-      console.error("Error checking blacklist:", error);
-      return false; // Assume token is not blacklisted if an error occurs
+    console.error("Error checking blacklist:", error);
+    return false;
   }
 };
 
-
-
-
-
 // Create and export the model
 const User = mongoose.models.User || mongoose.model('User', userSchema);
-
 
 export default User;
