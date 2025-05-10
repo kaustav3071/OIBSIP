@@ -17,7 +17,9 @@ connectDB();
 
 app.use(cors({
   origin: ['http://localhost:5173', 'https://pizzacraft-frontend.vercel.app'],
-  credentials: true
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 app.use(json());
