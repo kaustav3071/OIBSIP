@@ -42,6 +42,17 @@ PizzaCraft is a full-stack web application for managing a pizza ordering system.
 
 ---
 
+## Deployment
+
+Both the frontend and backend are deployed on **Render**.
+
+- **Frontend**: [https://pizzacraft-frontend.onrender.com/](https://pizzacraft-frontend.onrender.com/)
+- **Backend**: Hosted on Render and connected to the frontend.
+
+Visit my website: [https://pizzacraft-frontend.onrender.com/](https://pizzacraft-frontend.onrender.com/)
+
+---
+
 ## Installation
 
 ### Prerequisites:
@@ -108,6 +119,7 @@ PizzaCraft/
 │   ├── public/
 │   ├── index.html
 │   └── vite.config.js
+├── images/
 └── README.md 
 ```
 ## Usage
