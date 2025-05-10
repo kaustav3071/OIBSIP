@@ -155,6 +155,9 @@ const AddInventory = () => {
         let adjustedPrice = basePizzaPrice - defaultInventoryCost;
         adjustedPrice += basePrice + saucePrice + cheesePrice + veggiesPrice;
 
+        updatedCart[index].price = adjustedPrice;
+
+
         console.log("Price calculation:", {
             basePizzaPrice,
             defaultInventoryCost,

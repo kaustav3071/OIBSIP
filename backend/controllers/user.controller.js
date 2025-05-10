@@ -163,13 +163,19 @@ export const updateCart = async (req, res, next) => {
             const defaultSaucePrice = inventory.sauces.get('Tomato')?.price || 0;
             const defaultCheesePrice = inventory.cheeses.get('Mozzarella')?.price || 30;
             const defaultInventoryCost = defaultBasePrice + defaultSaucePrice + defaultCheesePrice;
-
+            const isPredefined = !!item.pizzaId;
             const basePizzaPrice = item.originalPrice || item.price || 0;
-            const adjustedPrice = basePizzaPrice - defaultInventoryCost + basePrice + saucePrice + cheesePrice + veggiesPrice;
+
+            let adjustedPrice = basePizzaPrice;
+
+            if (!isPredefined) {
+                adjustedPrice = basePizzaPrice - defaultInventoryCost + basePrice + saucePrice + cheesePrice + veggiesPrice;
+            }
 
             return {
                 ...item,
                 price: adjustedPrice,
+                originalPrice: item.originalPrice || item.price || 0,
             };
         });
 

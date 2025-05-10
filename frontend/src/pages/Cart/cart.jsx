@@ -86,7 +86,7 @@ const Cart = () => {
   // Calculate total price whenever the cart changes
   useEffect(() => {
     const calculateTotalPrice = () => {
-      const total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+      const total = cart.reduce((acc, item) => acc + item.originalPrice * item.quantity, 0);
       setTotalPrice(total);
     };
     calculateTotalPrice();
@@ -169,6 +169,7 @@ const Cart = () => {
         veggies: item.veggies,
         pizzaId: item.pizzaId,
         quantity: item.quantity,
+        price: item.originalPrice,
         razorpayOrderId,
         paymentId,
       };
@@ -374,7 +375,7 @@ const Cart = () => {
                     {item.quantity}
                     <button onClick={() => addToCart(item)}>+</button>
                   </td>
-                  <td>
+                  <td> 
                     <button
                       className="remove-btn"
                       onClick={() => removeItemCompletely(item.pizzaId)}
