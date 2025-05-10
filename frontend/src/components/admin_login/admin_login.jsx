@@ -16,7 +16,7 @@ const AdminLogin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("https://pizzacraft-backend.onrender.com/user/login", credentials);
+      const response = await axios.post("http://localhost:4000/user/login", credentials);
       if (response.status === 200 && response.data.user.role === "admin") {
         toast.success("Login successful!");
         localStorage.setItem("token", response.data.token); // Save token in localStorage

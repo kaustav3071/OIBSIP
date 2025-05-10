@@ -16,7 +16,7 @@ const UpdatePizza = () => {
     const [image, setImage] = useState(null); // State for the new image
     const [currentImage, setCurrentImage] = useState(""); // State for the current image
 
-    const url = "https://pizzacraft-backend.onrender.com/pizza";
+    const url = "http://localhost:4000/pizza";
 
     // Fetch pizza details by ID
     const fetchPizzaDetails = async () => {
@@ -86,7 +86,7 @@ const UpdatePizza = () => {
                             src={
                                 image
                                     ? URL.createObjectURL(image)
-                                    : `https://pizzacraft-backend.onrender.com/images/${currentImage}`
+                                    : `http://localhost:4000/images/${currentImage}`
                             }
                             alt="Pizza Preview"
                         />

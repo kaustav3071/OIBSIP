@@ -15,7 +15,7 @@ const UserUpdate = () => {
         password: "",
     });
 
-    const url = "https://pizzacraft-backend.onrender.com/user";
+    const url = "http://localhost:4000/user";
 
     // Fetch user details by ID
     const fetchUserDetails = async () => {

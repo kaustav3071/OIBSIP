@@ -13,7 +13,7 @@ const AddInventory = () => {
     const [selectedCheeses, setSelectedCheeses] = useState([]); // New state for cheese selections
 
     const api = axios.create({
-        baseURL: 'https://pizzacraft-backend.onrender.com',
+        baseURL: 'http://localhost:4000', // Replace with your backend URL
         timeout: 10000,
     });
 
@@ -244,7 +244,7 @@ const AddInventory = () => {
                         <h2>{pizza.pizzaName}</h2>
                         <div className="pizza-details">
                             <img
-                                src={`https://pizzacraft-backend.onrender.com/images/${pizza.pizzaImage}`}
+                                src={`http://localhost:4000/images/${pizza.pizzaImage}`}
                                 alt={pizza.pizzaName}
                                 className="pizza-image"
                             />

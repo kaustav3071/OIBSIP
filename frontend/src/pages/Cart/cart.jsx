@@ -12,7 +12,7 @@ const Cart = () => {
 
   // Create an Axios instance with a timeout
   const api = axios.create({
-    baseURL: 'https://pizzacraft-backend.onrender.com',
+    baseURL: 'http://localhost:4000',
     timeout: 10000, // 10 seconds
   });
 
@@ -356,7 +356,7 @@ const Cart = () => {
                 <tr key={index}>
                   <td>
                     <img
-                      src={`https://pizzacraft-backend.onrender.com/images/${item.pizzaImage}`}
+                      src={`http://localhost:4000/images/${item.pizzaImage}`}
                       alt={item.pizzaName}
                     />
                     {item.pizzaName}

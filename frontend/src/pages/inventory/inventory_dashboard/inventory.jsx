@@ -13,7 +13,7 @@ const InventoryDashboard = () => {
   const fetchInventory = async () => {
     try {
       // Trigger low stock email
-      const response2 = await axios.post("https://pizzacraft-backend.onrender.com/inventory/send-low-stock-email");
+      const response2 = await axios.post("http://localhost:4000/inventory/send-low-stock-email");
       if (response2.status === 200) {
         const { lowStockItems } = response2.data;
         if (lowStockItems && Object.values(lowStockItems).some(category => category.length > 0)) {
@@ -26,7 +26,7 @@ const InventoryDashboard = () => {
       }
 
       // Fetch inventory data
-      const response = await axios.get("https://pizzacraft-backend.onrender.com/inventory");
+      const response = await axios.get("http://localhost:4000/inventory");
       if (response.status === 200) {
         setInventory(response.data);
         toast.success("Inventory data fetched successfully!");
