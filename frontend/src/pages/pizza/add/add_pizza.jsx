@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 
 const Add = () => {
 
-    const url = "https://pizzacraft-backend.vercel.app"
+    const url = "https://pizzacraft-backend.onrender.com"
 
     const [image, setImage] = useState(null); // State to hold the image file
     const [data, setData] = useState({

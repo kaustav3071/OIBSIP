@@ -16,7 +16,7 @@ const UserLogin = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post("https://pizzacraft-backend.vercel.app/user/login", loginData);
+            const response = await axios.post("https://pizzacraft-backend.onrender.com/user/login", loginData);
             if (response.status === 200) {
                 toast.success("Login successful!");
                 localStorage.setItem("token", response.data.token); // Save token in localStorage

@@ -15,7 +15,7 @@ const UserUpdate = () => {
         password: "",
     });
 
-    const url = "https://pizzacraft-backend.vercel.app/user";
+    const url = "https://pizzacraft-backend.onrender.com/user";
 
     // Fetch user details by ID
     const fetchUserDetails = async () => {

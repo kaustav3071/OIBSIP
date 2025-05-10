@@ -16,7 +16,7 @@ const OrderConfirmation = () => {
     const fetchOrders = async () => {
       try {
         setLoading(true);
-        const response = await axios.get("https://pizzacraft-backend.vercel.app/order/get_orders", {
+        const response = await axios.get("https://pizzacraft-backend.onrender.com/order/get_orders", {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },

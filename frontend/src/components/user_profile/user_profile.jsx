@@ -21,7 +21,7 @@ const UserProfile = () => {
                     console.error("No token found");
                     return;
                 }
-                const response = await axios.get("https://pizzacraft-backend.vercel.app/user/profile", {
+                const response = await axios.get("https://pizzacraft-backend.onrender.com/user/profile", {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },

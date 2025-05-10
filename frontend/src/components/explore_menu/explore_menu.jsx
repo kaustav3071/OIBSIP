@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const ExploreMenu = () => {
-    const url = "https://pizzacraft-backend.vercel.app/pizza";
+    const url = "https://pizzacraft-backend.onrender.com/pizza";
     const [getAll, setGetAll] = useState([]);
     const navigate = useNavigate();
     const [itemCounts, setItemCounts] = useState({});
@@ -14,7 +14,7 @@ const ExploreMenu = () => {
     const [cart, setCart] = useState([]);
 
     const api = axios.create({
-        baseURL: 'https://pizzacraft-backend.vercel.app',
+        baseURL: 'https://pizzacraft-backend.onrender.com',
         timeout: 10000,
     });
 
@@ -148,7 +148,7 @@ const ExploreMenu = () => {
                 {getAll.length > 0 ? (
                     getAll.map((pizza) => (
                         <div className="menu-item" key={pizza._id}>
-                            <img src={`https://pizzacraft-backend.vercel.app/images/${pizza.image}`} alt={pizza.name} />
+                            <img src={`https://pizzacraft-backend.onrender.com/images/${pizza.image}`} alt={pizza.name} />
                             <h2 className="menu-name">{pizza.name}</h2>
                             <p className="menu-description">{pizza.description}</p>
                             <p className="menu-price">Price: Rs {pizza.price}</p>

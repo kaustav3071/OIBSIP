@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom"; // Import useNavigate for navigation
 
 const GetAll = () => {
-    const url = "https://pizzacraft-backend.vercel.app";
+    const url = "https://pizzacraft-backend.onrender.com";
     const [getAll, setGetAll] = useState([]);
     const navigate = useNavigate(); // Initialize navigation
 
@@ -57,7 +57,7 @@ const GetAll = () => {
                 {getAll.length > 0 ? (
                     getAll.map((pizza) => (
                         <div key={pizza._id} className="pizza-card">
-                            <img src={`https://pizzacraft-backend.vercel.app/images/${pizza.image}`} alt={pizza.name} />
+                            <img src={`https://pizzacraft-backend.onrender.com/images/${pizza.image}`} alt={pizza.name} />
                             <h2>{pizza.name}</h2>
                             <p>{pizza.description}</p>
                             <p>Price: ₹{pizza.price}</p>

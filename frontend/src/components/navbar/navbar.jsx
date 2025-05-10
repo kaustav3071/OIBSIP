@@ -15,7 +15,7 @@ const Navbar = () => {
         try{
             const token = localStorage.getItem("token"); // Get the token from local storage
             if (token) {
-                axios.post("https://pizzacraft-backend.vercel.app/user/logout", {}, {
+                axios.post("https://pizzacraft-backend.onrender.com/user/logout", {}, {
                     headers: {
                         Authorization: `Bearer ${token}` // Include the token in the request header
                     }

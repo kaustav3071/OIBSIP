@@ -15,7 +15,7 @@ const OrderManage = () => {
                 return;
             }
 
-            const response = await fetch('https://pizzacraft-backend.vercel.app/order/get_orders', {
+            const response = await fetch('https://pizzacraft-backend.onrender.com/order/get_orders', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -53,7 +53,7 @@ const OrderManage = () => {
                 return;
             }
 
-            const response = await fetch('https://pizzacraft-backend.vercel.app/order/update_order/' + orderId, {
+            const response = await fetch('https://pizzacraft-backend.onrender.com/order/update_order/' + orderId, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -84,7 +84,7 @@ const OrderManage = () => {
                 return;
             }
 
-            const response = await fetch('https://pizzacraft-backend.vercel.app/order/cancel_order/' + orderId, {
+            const response = await fetch('https://pizzacraft-backend.onrender.com/order/cancel_order/' + orderId, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',

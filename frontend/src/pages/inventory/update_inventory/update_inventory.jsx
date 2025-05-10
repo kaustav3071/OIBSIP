@@ -18,7 +18,7 @@ const UpdateInventory = () => {
   // Fetch inventory data from the backend
   const fetchInventory = async () => {
     try {
-      const response = await axios.get("https://pizzacraft-backend.vercel.app/inventory");
+      const response = await axios.get("https://pizzacraft-backend.onrender.com/inventory");
       if (response.status === 200) {
         setInventory(response.data);
         // Initialize updatedInventory with the fetched data
@@ -63,7 +63,7 @@ const UpdateInventory = () => {
   const handleUpdateSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.put("https://pizzacraft-backend.vercel.app/inventory", updatedInventory);
+      const response = await axios.put("https://pizzacraft-backend.onrender.com/inventory", updatedInventory);
       if (response.status === 200) {
         toast.success("Inventory updated successfully!");
         // Refresh the inventory data
