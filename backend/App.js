@@ -16,7 +16,7 @@ app.use(cookieParser());
 connectDB();
 
 app.use(cors({
-  origin: ['http://localhost:5173', 'https://pizzacraft-frontend.vercel.app'],
+  origin: ['http://localhost:5173', 'https://pizzacraft-frontend.onrender.com/'],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization']
