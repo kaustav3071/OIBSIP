@@ -210,6 +210,7 @@ const Cart = () => {
     }
 
     if (!razorpayKey) {
+      console.error("Razorpay key is not available");
       toast.error("Payment system is not initialized. Please try again later.");
       return;
     }
