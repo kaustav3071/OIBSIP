@@ -15,7 +15,11 @@ import RazorpayRouter from './routes/razorpay.route.js';
 app.use(cookieParser());
 connectDB();
 
-app.use(cors());
+app.use(cors({
+  origin: ['http://localhost:5173', 'https://your-vercel-frontend-domain.vercel.app'],
+  credentials: true
+}));
+
 app.use(json());
 app.use(urlencoded({ extended: true }));
 
@@ -34,6 +38,11 @@ app.use('/', contactRouter)
 
 
 app.use('/payment', RazorpayRouter)
+
+
+app.get('/', (req, res) => {
+  res.send('PizzaCraft Backend is Running!');
+});
 
 export default app;
 
