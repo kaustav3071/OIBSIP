@@ -39,7 +39,7 @@ export const registerUser = async (req, res, next) => {
 
     await newUser.save();
 
-    const verificationUrl = `http://localhost:4000/user/verify/${emailVerificationToken}`;
+    const verificationUrl = `https://pizzacraft-backend.onrender.com/user/verify/${emailVerificationToken}`;
 
     const transporter = nodemailer.createTransport({
       service: 'gmail',
