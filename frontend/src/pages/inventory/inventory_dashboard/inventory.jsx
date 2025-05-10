@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 const InventoryDashboard = () => {
+  const url =  import.meta.env.VITE_API_URL; // Base URL for API requests
   const [inventory, setInventory] = useState(null); // Changed initial state to null
   const [error, setError] = useState(null); // State to hold error messages
   const navigate = useNavigate();
@@ -13,7 +14,7 @@ const InventoryDashboard = () => {
   const fetchInventory = async () => {
     try {
       // Trigger low stock email
-      const response2 = await axios.post("http://localhost:4000/inventory/send-low-stock-email");
+      const response2 = await axios.post(`${url}/inventory/send-low-stock-email`);
       if (response2.status === 200) {
         const { lowStockItems } = response2.data;
         if (lowStockItems && Object.values(lowStockItems).some(category => category.length > 0)) {
@@ -26,7 +27,7 @@ const InventoryDashboard = () => {
       }
 
       // Fetch inventory data
-      const response = await axios.get("http://localhost:4000/inventory");
+      const response = await axios.get(`${url}/inventory`);
       if (response.status === 200) {
         setInventory(response.data);
         toast.success("Inventory data fetched successfully!");

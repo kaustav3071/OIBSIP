@@ -15,12 +15,12 @@ const UserUpdate = () => {
         password: "",
     });
 
-    const url = "http://localhost:4000/user";
+    const url = import.meta.env.VITE_API_URL; // Base URL for API requests
 
     // Fetch user details by ID
     const fetchUserDetails = async () => {
         try {
-          const response = await axios.get(`${url}/user/${id}`); // Fetch user by ID
+          const response = await axios.get(`${url}/user/user/${id}`); // Fetch user by ID
           if (response.status === 200 && response.data) {
             setData({
               name: response.data.name,
@@ -52,7 +52,7 @@ const UserUpdate = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.put(`${url}/updateUser/${id}`, data);
+            await axios.put(`${url}/user/updateUser/${id}`, data);
             toast.success("User updated successfully!");
             navigate("/admin/users");
         } catch (error) {

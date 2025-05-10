@@ -16,12 +16,12 @@ const UpdatePizza = () => {
     const [image, setImage] = useState(null); // State for the new image
     const [currentImage, setCurrentImage] = useState(""); // State for the current image
 
-    const url = "http://localhost:4000/pizza";
+    const url =  import.meta.env.VITE_API_URL; // Base URL for API requests
 
     // Fetch pizza details by ID
     const fetchPizzaDetails = async () => {
         try {
-            const response = await axios.get(`${url}/getallpizzas`);
+            const response = await axios.get(`${url}/pizza/getallpizzas`);
             const pizza = response.data.find((p) => p._id === id);
             if (pizza) {
                 setData({
@@ -62,7 +62,7 @@ const UpdatePizza = () => {
         formData.append("price", Number(data.price));
 
         try {
-            const response = await axios.put(`${url}/updatepizza/${id}`, formData);
+            const response = await axios.put(`${url}/pizza/updatepizza/${id}`, formData);
             if (response.status === 200) {
                 toast.success("Pizza updated successfully!");
                 navigate("/admin/pizza_dashboard/get");
@@ -86,7 +86,7 @@ const UpdatePizza = () => {
                             src={
                                 image
                                     ? URL.createObjectURL(image)
-                                    : `http://localhost:4000/images/${currentImage}`
+                                    : `${url}/images/${currentImage}`
                             }
                             alt="Pizza Preview"
                         />

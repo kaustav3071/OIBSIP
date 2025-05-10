@@ -5,14 +5,14 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom"; // Import useNavigate for navigation
 
 const GetAll = () => {
-    const url = "http://localhost:4000/pizza";
+    const url = import.meta.env.VITE_API_URL; // Base URL for API requests
     const [getAll, setGetAll] = useState([]);
     const navigate = useNavigate(); // Initialize navigation
 
     // Fetch all pizzas
     const fetchAllPizzas = async () => {
         try {
-            const response = await axios.get(`${url}/getallpizzas`);
+            const response = await axios.get(`${url}/pizza/getallpizzas`);
             if (response.status === 200) {
                 setGetAll(response.data);
             } else {
@@ -28,7 +28,7 @@ const GetAll = () => {
     const deletePizza = async (id) => {
         try {
             console.log("Deleting pizza with ID:", id); // Log the ID being deleted
-            const response = await axios.delete(`${url}/deletepizza/${id}`);
+            const response = await axios.delete(`${url}/pizza/deletepizza/${id}`);
             console.log("Delete response:", response); // Log the response from the server
             if (response.status === 200) {
                 toast.success("Pizza deleted successfully");
@@ -57,7 +57,7 @@ const GetAll = () => {
                 {getAll.length > 0 ? (
                     getAll.map((pizza) => (
                         <div key={pizza._id} className="pizza-card">
-                            <img src={`http://localhost:4000/images/${pizza.image}`} alt={pizza.name} />
+                            <img src={`${url}/images/${pizza.image}`} alt={pizza.name} />
                             <h2>{pizza.name}</h2>
                             <p>{pizza.description}</p>
                             <p>Price: ₹{pizza.price}</p>

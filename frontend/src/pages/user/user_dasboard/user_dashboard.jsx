@@ -5,6 +5,7 @@ import { toast } from "react-toastify"; // Import toast for notifications
 import { useNavigate } from "react-router-dom"; // Import useNavigate for navigation
 
 const UserDashboard = () => {
+  const url =  import.meta.env.VITE_API_URL; // Base URL for API requests
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate(); // Initialize navigation
@@ -13,7 +14,7 @@ const UserDashboard = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/user/allUsers");
+        const response = await axios.get(`${url}/user/allUsers`);
         setUsers(response.data);
         setLoading(false);
       } catch (error) {
@@ -32,7 +33,7 @@ const UserDashboard = () => {
     }
   
     try {
-      const response = await axios.delete(`http://localhost:4000/user/delete/${id}`);
+      const response = await axios.delete(`${url}/user/delete/${id}`);
   
       if (response.status === 200) {
         toast.success("User deleted successfully");

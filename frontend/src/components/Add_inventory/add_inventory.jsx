@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 const AddInventory = () => {
+    const url = import.meta.env.VITE_API_URL;
     const navigate = useNavigate();
     const [cart, setCart] = useState([]);
     const [inventory, setInventory] = useState(null);
@@ -13,7 +14,7 @@ const AddInventory = () => {
     const [selectedCheeses, setSelectedCheeses] = useState([]); // New state for cheese selections
 
     const api = axios.create({
-        baseURL: 'http://localhost:4000', // Replace with your backend URL
+        baseURL: import.meta.env.VITE_API_URL,
         timeout: 10000,
     });
 
@@ -244,7 +245,7 @@ const AddInventory = () => {
                         <h2>{pizza.pizzaName}</h2>
                         <div className="pizza-details">
                             <img
-                                src={`http://localhost:4000/images/${pizza.pizzaImage}`}
+                                src={`${url}/images/${pizza.pizzaImage}`}
                                 alt={pizza.pizzaName}
                                 className="pizza-image"
                             />

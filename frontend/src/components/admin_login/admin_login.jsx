@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 const AdminLogin = () => {
+  const baseURL =  import.meta.env.VITE_API_URL;
   const [credentials, setCredentials] = useState({ email: "", password: "" });
   const navigate = useNavigate();
 
@@ -16,7 +17,7 @@ const AdminLogin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:4000/user/login", credentials);
+      const response = await axios.post(`${baseURL}/user/login`, credentials);
       if (response.status === 200 && response.data.user.role === "admin") {
         toast.success("Login successful!");
         localStorage.setItem("token", response.data.token); // Save token in localStorage

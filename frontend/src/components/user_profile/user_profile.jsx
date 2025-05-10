@@ -4,6 +4,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 
 const UserProfile = () => {
+    const url =  import.meta.env.VITE_API_URL; // Base URL for API requests
     const [userData, setUserData] = useState({
         name: "",
         email: "",
@@ -21,7 +22,7 @@ const UserProfile = () => {
                     console.error("No token found");
                     return;
                 }
-                const response = await axios.get("http://localhost:4000/user/profile", {
+                const response = await axios.get(`${url}/user/profile`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },

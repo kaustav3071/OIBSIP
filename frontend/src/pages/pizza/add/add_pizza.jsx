@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 
 const Add = () => {
 
-    const url = "http://localhost:4000"
+    const url =import.meta.env.VITE_API_URL; // Base URL for API requests
 
     const [image, setImage] = useState(null); // State to hold the image file
     const [data, setData] = useState({

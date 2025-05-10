@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import "./inventory.css";
 
 const Inventory = () => {
-  const url = "http://localhost:4000";
+  const url = import.meta.env.VITE_API_URL;
   const [inventory, setInventory] = useState({
     bases: new Map(),
     sauces: new Map(),

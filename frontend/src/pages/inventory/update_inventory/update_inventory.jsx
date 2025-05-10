@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 const UpdateInventory = () => {
+  const url =  import.meta.env.VITE_API_URL; // Base URL for API requests
   const [inventory, setInventory] = useState(null); // Store the fetched inventory data
   const [error, setError] = useState(null); // Store error messages
   const [updatedInventory, setUpdatedInventory] = useState({ // Track the updated values
@@ -18,7 +19,7 @@ const UpdateInventory = () => {
   // Fetch inventory data from the backend
   const fetchInventory = async () => {
     try {
-      const response = await axios.get("http://localhost:4000/inventory");
+      const response = await axios.get(`${url}/inventory`);
       if (response.status === 200) {
         setInventory(response.data);
         // Initialize updatedInventory with the fetched data
@@ -63,7 +64,7 @@ const UpdateInventory = () => {
   const handleUpdateSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.put("http://localhost:4000/inventory", updatedInventory);
+      const response = await axios.put(`${url}/inventory`, updatedInventory);
       if (response.status === 200) {
         toast.success("Inventory updated successfully!");
         // Refresh the inventory data

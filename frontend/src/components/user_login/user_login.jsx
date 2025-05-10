@@ -5,6 +5,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const UserLogin = () => {
+    const url = import.meta.env.VITE_API_URL; // Base URL for API requests
     const [loginData, setLoginData] = useState({ email: "", password: "" });
     const navigate = useNavigate();
 
@@ -16,7 +17,7 @@ const UserLogin = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post("http://localhost:4000/user/login", loginData);
+            const response = await axios.post(`${url}/user/login`, loginData);
             if (response.status === 200) {
                 toast.success("Login successful!");
                 localStorage.setItem("token", response.data.token); // Save token in localStorage

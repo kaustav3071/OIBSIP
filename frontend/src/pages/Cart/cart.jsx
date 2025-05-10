@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Cart = () => {
+  const url =  import.meta.env.VITE_API_URL; // Base URL for API requests
   const navigate = useNavigate();
   const [cart, setCart] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
@@ -12,7 +13,7 @@ const Cart = () => {
 
   // Create an Axios instance with a timeout
   const api = axios.create({
-    baseURL: 'http://localhost:4000',
+    baseURL: import.meta.env.VITE_API_URL,
     timeout: 10000, // 10 seconds
   });
 
@@ -356,7 +357,7 @@ const Cart = () => {
                 <tr key={index}>
                   <td>
                     <img
-                      src={`http://localhost:4000/images/${item.pizzaImage}`}
+                      src={`${url}/images/${item.pizzaImage}`}
                       alt={item.pizzaName}
                     />
                     {item.pizzaName}

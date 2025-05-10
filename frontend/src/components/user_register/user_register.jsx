@@ -5,6 +5,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const UserRegister = () => {
+    const url = import.meta.env.VITE_API_URL; // Base URL for API requests
     const [userData, setUserData] = useState({ name: "", email: "", password: "" });
     const navigate = useNavigate();
 
@@ -16,7 +17,7 @@ const UserRegister = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post("http://localhost:4000/user/register", userData);
+            const response = await axios.post(`${url}/user/register`, userData);
             if (response.status === 201) {
                 toast.success("Registration successful! Please verify your email.");
                 localStorage.setItem("token", response.data.token); // Save token in localStorage

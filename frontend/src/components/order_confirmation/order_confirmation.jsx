@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import "./order_confirmation.css";
 
 const OrderConfirmation = () => {
+  const url = import.meta.env.VITE_API_URL;
   const navigate = useNavigate();
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -16,7 +17,7 @@ const OrderConfirmation = () => {
     const fetchOrders = async () => {
       try {
         setLoading(true);
-        const response = await axios.get("http://localhost:4000/order/get_orders", {
+        const response = await axios.get(`${url}/order/get_orders`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },

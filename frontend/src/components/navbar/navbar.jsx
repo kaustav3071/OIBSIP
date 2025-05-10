@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 const Navbar = () => {
+    const url = import.meta.env.VITE_API_URL; // Base URL for API requests
     const [activeLink, setActiveLink] = useState("#dashboard"); // Default active link
 
     const handleLinkClick = (link) => {
@@ -15,7 +16,7 @@ const Navbar = () => {
         try{
             const token = localStorage.getItem("token"); // Get the token from local storage
             if (token) {
-                axios.post("http://localhost:4000/user/logout", {}, {
+                axios.post(`${url}/user/logout`, {}, {
                     headers: {
                         Authorization: `Bearer ${token}` // Include the token in the request header
                     }

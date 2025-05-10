@@ -3,6 +3,7 @@ import './order_manage.css';
 import { toast } from 'react-toastify';
 
 const OrderManage = () => {
+    const url =  import.meta.env.VITE_API_URL;
     const [orders, setOrders] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -15,7 +16,7 @@ const OrderManage = () => {
                 return;
             }
 
-            const response = await fetch('http://localhost:4000/order/get_orders', {
+            const response = await fetch(`${url}/order/get_orders`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -53,7 +54,7 @@ const OrderManage = () => {
                 return;
             }
 
-            const response = await fetch('http://localhost:4000/order/update_order/' + orderId, {
+            const response = await fetch(`${url}/order/update_order/` + orderId, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -84,7 +85,7 @@ const OrderManage = () => {
                 return;
             }
 
-            const response = await fetch('http://localhost:4000/order/cancel_order/' + orderId, {
+            const response = await fetch(`${url}/order/cancel_order/` + orderId, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',

@@ -3,6 +3,7 @@ import "./contact.css"; // Add a CSS file for styling
 import axios from "axios";
 
 const Contact = () => {
+  const url = import.meta.env.VITE_API_URL; // Base URL for API requests
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -21,7 +22,7 @@ const Contact = () => {
           console.error("No token found");
           return;
         }
-        const response = await axios.get("http://localhost:4000/user/profile", {
+        const response = await axios.get(`${url}/user/profile`, {
           headers: {
             Authorization: `Bearer ${token}`, // Pass the token in the Authorization header
           },
@@ -70,7 +71,7 @@ const Contact = () => {
   
     try {
       console.log("Form submitted:", formData);
-      const response = await axios.post("http://localhost:4000/contact", formData);
+      const response = await axios.post(`${url}/contact`, formData);
   
       if (response.status === 200) {
         console.log("Email sent successfully");
