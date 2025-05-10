@@ -13,7 +13,7 @@ const UserDashboard = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/user/allUsers");
+        const response = await axios.get("https://pizzacraft-backend.vercel.app/user/allUsers");
         setUsers(response.data);
         setLoading(false);
       } catch (error) {
@@ -32,7 +32,7 @@ const UserDashboard = () => {
     }
   
     try {
-      const response = await axios.delete(`http://localhost:4000/user/delete/${id}`);
+      const response = await axios.delete(`https://pizzacraft-backend.vercel.app/user/delete/${id}`);
   
       if (response.status === 200) {
         toast.success("User deleted successfully");

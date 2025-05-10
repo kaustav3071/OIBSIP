@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import "./inventory.css";
 
 const Inventory = () => {
-  const url = "http://localhost:4000";
+  const url = "https://pizzacraft-backend.vercel.app";
   const [inventory, setInventory] = useState({
     bases: new Map(),
     sauces: new Map(),

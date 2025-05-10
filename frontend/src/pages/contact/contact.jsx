@@ -21,7 +21,7 @@ const Contact = () => {
           console.error("No token found");
           return;
         }
-        const response = await axios.get("http://localhost:4000/user/profile", {
+        const response = await axios.get("https://pizzacraft-backend.vercel.app/user/profile", {
           headers: {
             Authorization: `Bearer ${token}`, // Pass the token in the Authorization header
           },
@@ -70,7 +70,7 @@ const Contact = () => {
   
     try {
       console.log("Form submitted:", formData);
-      const response = await axios.post("http://localhost:4000/contact", formData);
+      const response = await axios.post("https://pizzacraft-backend.vercel.app/contact", formData);
   
       if (response.status === 200) {
         console.log("Email sent successfully");

@@ -16,7 +16,7 @@ const UpdatePizza = () => {
     const [image, setImage] = useState(null); // State for the new image
     const [currentImage, setCurrentImage] = useState(""); // State for the current image
 
-    const url = "http://localhost:4000/pizza";
+    const url = "https://pizzacraft-backend.vercel.app/pizza";
 
     // Fetch pizza details by ID
     const fetchPizzaDetails = async () => {
@@ -86,7 +86,7 @@ const UpdatePizza = () => {
                             src={
                                 image
                                     ? URL.createObjectURL(image)
-                                    : `http://localhost:4000/images/${currentImage}`
+                                    : `https://pizzacraft-backend.vercel.app/images/${currentImage}`
                             }
                             alt="Pizza Preview"
                         />

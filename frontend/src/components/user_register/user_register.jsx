@@ -16,7 +16,7 @@ const UserRegister = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post("http://localhost:4000/user/register", userData);
+            const response = await axios.post("https://pizzacraft-backend.vercel.app/user/register", userData);
             if (response.status === 201) {
                 toast.success("Registration successful! Please verify your email.");
                 localStorage.setItem("token", response.data.token); // Save token in localStorage

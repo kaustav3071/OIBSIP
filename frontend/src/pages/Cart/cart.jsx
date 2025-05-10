@@ -12,7 +12,7 @@ const Cart = () => {
 
   // Create an Axios instance with a timeout
   const api = axios.create({
-    baseURL: 'http://localhost:4000',
+    baseURL: 'https://pizzacraft-backend.vercel.app',
     timeout: 10000, // 10 seconds
   });
 
@@ -356,7 +356,7 @@ const Cart = () => {
                 <tr key={index}>
                   <td>
                     <img
-                      src={`http://localhost:4000/images/${item.pizzaImage}`}
+                      src={`https://pizzacraft-backend.vercel.app/images/${item.pizzaImage}`}
                       alt={item.pizzaName}
                     />
                     {item.pizzaName}

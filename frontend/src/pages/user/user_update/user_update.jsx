@@ -15,7 +15,7 @@ const UserUpdate = () => {
         password: "",
     });
 
-    const url = "http://localhost:4000/user";
+    const url = "https://pizzacraft-backend.vercel.app/user";
 
     // Fetch user details by ID
     const fetchUserDetails = async () => {
