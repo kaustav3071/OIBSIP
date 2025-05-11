@@ -86,6 +86,10 @@ const userSchema = new mongoose.Schema(
     passwordResetExpires: {
       type: Date,
     },
+    address: {
+    type: String,
+    required: true,
+    },
   },
   {
     timestamps: true,
