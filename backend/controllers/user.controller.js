@@ -16,7 +16,7 @@ export const registerUser = async (req, res, next) => {
     return res.status(400).json({ errors: errors.array() });
   }
 
-  const { name, email, password, role } = req.body;
+  const { name, email, password, address, role } = req.body;
 
   try {
     const isUserAlreadyExist = await userModel.findOne({ email });
@@ -33,6 +33,7 @@ export const registerUser = async (req, res, next) => {
       email,
       password: hashedPassword,
       role: role || 'user',
+      address,
       emailVerificationToken,
       isVerified: false,
     });
@@ -101,6 +102,7 @@ export const loginUser = async (req, res, next) => {
         name: user.name,
         email: user.email,
         role: user.role,
+        address: user.address,
         cartData: user.cartData || [], // Ensure cartData is an array
       },
     });
