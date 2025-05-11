@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 const UserRegister = () => {
     const url = import.meta.env.VITE_API_URL; // Base URL for API requests
-    const [userData, setUserData] = useState({ name: "", email: "", password: "" });
+    const [userData, setUserData] = useState({ name: "", email: "", password: "", address: "" });
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -63,6 +63,17 @@ const UserRegister = () => {
                     required
                     minLength="6"
                     value={userData.password}
+                    onChange={handleChange}
+                />
+                <br />
+                <br />
+                <label htmlFor="address">Address:</label>
+                <input
+                    type="text"
+                    id="address"
+                    name="address"
+                    required
+                    value={userData.address}
                     onChange={handleChange}
                 />
                 <br />
