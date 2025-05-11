@@ -27,12 +27,13 @@ const UserProfile = () => {
                         Authorization: `Bearer ${token}`,
                     },
                 });
-                const { name, email, role, isVerified } = response.data.user;
+                const { name, email, role, address, isVerified } = response.data.user;
                 setUserData((prevData) => ({
                     ...prevData,
                     name: name || "", 
                     email: email || "", 
-                    role: role || "", 
+                    role: role || "",
+                    address: address || "",
                     verified: isVerified ? "Verified" : "Not Verified",
                 }));
             
@@ -75,6 +76,15 @@ const UserProfile = () => {
               name="role"
               required
               value={userData.role}
+              readOnly
+            />
+            <label htmlFor="address">Address:</label>
+            <input
+              type="text"
+              id="address"
+              name="address"
+              required
+              value={userData.address}
               readOnly
             />
             <label htmlFor="verified">Verified Status:</label>
