@@ -96,6 +96,18 @@ const userSchema = new mongoose.Schema(
   }
 );
 
+userSchema.pre('save', async function (next) {
+  if (this.role === 'admin') {
+    const existingAdmin = await mongoose.models.User.findOne({ role: 'admin' });
+    if (existingAdmin && existingAdmin._id.toString() !== this._id.toString()) {
+      const error = new Error('Only one admin is allowed in the database.');
+      error.status = 400;
+      return next(error);
+    }
+  }
+  next();
+});
+
 // Generate JWT token
 userSchema.methods.generateAuthToken = function () {
   return jwt.sign({ _id: this._id, role: this.role }, process.env.JWT_SECRET, {
