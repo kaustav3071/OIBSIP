@@ -77,7 +77,7 @@ const generateLowStockEmail = (lowStockItems) => {
                   <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                     <tr>
                       <td style="text-align: center;">
-                        <a href="http://localhost:5173/admin/inventory/update" style="display: inline-block; padding: 12px 24px; background-color: #4caf50; color: #ffffff; text-decoration: none; border-radius: 8px; font-size: 16px; font-weight: bold;">Update Inventory</a>
+                        <a href="https://pizzacraft-frontend.onrender.com/admin/inventory/update" style="display: inline-block; padding: 12px 24px; background-color: #4caf50; color: #ffffff; text-decoration: none; border-radius: 8px; font-size: 16px; font-weight: bold;">Update Inventory</a>
                       </td>
                     </tr>
                   </table>
