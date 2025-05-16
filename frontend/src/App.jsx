@@ -42,6 +42,7 @@ const App = () => {
   const location = useLocation(); // Get the current route
 
   // Check if the current route starts with "/admin"
+  // and if the route is "/contact"
   const isAdminRoute = location.pathname.startsWith('/admin');
   const isContactRoute = location.pathname === '/contact'; // Check if the route is /contact
 
