@@ -43,6 +43,7 @@ const App = () => {
 
   // Check if the current route starts with "/admin"
   // and if the route is "/contact"
+  // to conditionally render the Navbar and Footer
   const isAdminRoute = location.pathname.startsWith('/admin');
   const isContactRoute = location.pathname === '/contact'; // Check if the route is /contact
 
